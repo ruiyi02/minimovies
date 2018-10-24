@@ -34,4 +34,7 @@ router.post('/message', controllers.message.post)
 
 router.get('/demo', controllers.demo)
 
+//get list of movies
+router.get('/movie', controllers.movie.list)
+
 module.exports = router
