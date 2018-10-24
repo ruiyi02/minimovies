@@ -4,7 +4,12 @@
 	"miniprogramRoot": "client/",
 	"qcloudRoot": "server/",
 	"setting": {
-		"newFeature": true
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"nodeModules": true
 	},
 	"appid": "wxe7ed4c463f941c66",
 	"projectname": "minimovies",
