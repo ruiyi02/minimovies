@@ -1,0 +1,21 @@
+<!--index.wxml-->
+<view class="container">
+    <!-- 用户登录测试 -->
+    <view class="userinfo">
+        <image
+            class="userinfo-avatar"
+            src="{{logged ? userInfo.avatarUrl : '/images/user-unlogin.png'}}"
+            background-size="cover"
+        ></image>
+        <view>
+            <button class="userinfo-nickname" wx:if="{{!logged}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">点击测试登录接口</button>
+            <text class="userinfo-nickname" wx:else>{{userInfo.nickName}}</text>
+        </view>
+    </view>
+
+    <view class="uploader">
+        <navigator url="../list/list" open-type="navigate" class="uploader-text">
+            <text>热门电影</text>
+        </navigator>
+    </view>
+</view>

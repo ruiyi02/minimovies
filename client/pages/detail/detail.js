@@ -19,7 +19,7 @@ Page({
   },
 
   //function to get the movie detail based id
-  getMovie(id) {
+  getMovie: function(id) {
     wx.showLoading({
       title: '电影内容加载中...',
     })
@@ -30,7 +30,6 @@ Page({
         wx.hideLoading()
 
         let data = result.data
-        console.log(data);
 
         if (!data.code) {
           this.setData({
@@ -49,6 +48,21 @@ Page({
           wx.navigateBack()
         }, 2000)
       }
+    })
+  },
+
+ //navigate to comment list page
+  viewComments: function()
+  {
+    wx.navigateTo({
+      url: '/pages/',
+    })
+  },
+
+  //navigate to add comment page
+  addComment: function () {
+    wx.navigateTo({
+      url: '/pages/add-comment/add-comment?' + 'id=' + this.data.movie.id + '&title=' + this.data.movie.title + '&image=' + this.data.movie.image,
     })
   }
 

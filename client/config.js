@@ -18,7 +18,13 @@ var config = {
         movieListUrl: `${host}/weapp/movie`,
 
         //get movie detail
-        movieDetailUrl: `${host}/weapp/movie/`
+        movieDetailUrl: `${host}/weapp/movie/`,
+
+         // 添加评论
+        addCommentUrl: `${host}/weapp/comment`,
+
+        // 获取评论列表
+        commentListUrl: `${host}/weapp/comment`,
     }
 };
 

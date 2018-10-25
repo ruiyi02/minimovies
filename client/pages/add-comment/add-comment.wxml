@@ -1,0 +1,22 @@
+<view class="page"> 
+  <view class="page__bd">  
+          <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__hd">
+                <image class="weui-article__img" src="{{movie.image}}" mode="aspectFit" style="width: 680rpx" />
+            </view>
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__h1">{{movie.title}}</view>            
+                </view>  
+                  <view class="weui-article">  
+                  <view class="weui-article__section">
+                      <textarea placeholder='请填写你的评论' auto-focus maxlength='255' bindinput='onInput'></textarea>
+                  </view>
+                </view>        
+            </view>
+            <view class="weui-panel__ft">          
+                <button class="weui-btn" disabled="{{!commentValue? true:false}}" type="primary" bindtap='addComment'>完成</button>              
+            </view>
+        </view>
+    </view>
+</view>
