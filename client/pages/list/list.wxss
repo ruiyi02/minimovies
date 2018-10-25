@@ -1,0 +1,12 @@
+.movie-poster{
+    margin-left: 10rpx;
+    vertical-align: middle;
+    width:200rpx; 
+    height: 260rpx;
+}
+
+.error-message{
+  margin-top: 100rpx;
+  text-align: center
+}
+

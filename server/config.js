@@ -9,7 +9,7 @@ const CONF = {
     appSecret: 'cd443c635adbfa5ee1fd2919f2574c68',
 
     //使用腾讯云代理登录小程序
-    useQcloudLogin: false,
+    useQcloudLogin: true,
 
     qcloudAppId: '1257887389',
     qcloudSecretId: 'AKIDytqrz2TrLwSvHbdW3cEtffnv3JgCYWLF',
@@ -22,12 +22,11 @@ const CONF = {
      * 开发环境下，MySQL 的初始密码为您的微信小程序 appid
      */
     mysql: {
-        host: '127.0.0.1',
+        host: 'localhost',
         port: 3306,
         user: 'root',
         db: 'cAuth',
-        pass: '',
-
+        pass: 'wxe7ed4c463f941c66',
         char: 'utf8mb4'
     },
 

@@ -37,4 +37,7 @@ router.get('/demo', controllers.demo)
 //get list of movies
 router.get('/movie', controllers.movie.list)
 
+//get movie detail
+router.get('/movie/:id', controllers.movie.detail)
+
 module.exports = router

@@ -1,0 +1,55 @@
+const qcloud = require('../../vendor/wafer2-client-sdk/index')
+const config = require('../../config')
+const _ = require('../../utils/util')
+
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    movie: {}
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {  
+    this.getMovie(options.id)
+  },
+
+  //function to get the movie detail based id
+  getMovie(id) {
+    wx.showLoading({
+      title: '电影内容加载中...',
+    })
+
+    qcloud.request({
+      url: config.service.movieDetailUrl + id,
+      success: result => {
+        wx.hideLoading()
+
+        let data = result.data
+        console.log(data);
+
+        if (!data.code) {
+          this.setData({
+            movie: data.data
+          })
+        } else {
+          setTimeout(() => {
+            wx.navigateBack()
+          }, 2000)
+        }
+      },
+      fail: () => {
+        wx.hideLoading()
+
+        setTimeout(() => {
+          wx.navigateBack()
+        }, 2000)
+      }
+    })
+  }
+
+})

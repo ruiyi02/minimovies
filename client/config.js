@@ -14,14 +14,11 @@ var config = {
         // 登录地址，用于建立会话
         loginUrl: `${host}/weapp/login`,
 
-        // 测试的请求地址，用于测试会话
-        requestUrl: `${host}/weapp/user`,
+        //get movie list
+        movieListUrl: `${host}/weapp/movie`,
 
-        // 测试的信道服务地址
-        tunnelUrl: `${host}/weapp/tunnel`,
-
-        // 上传图片接口
-        uploadUrl: `${host}/weapp/upload`
+        //get movie detail
+        movieDetailUrl: `${host}/weapp/movie/`
     }
 };
 
