@@ -1,6 +1,6 @@
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const config = require('../../config')
-const _ = require('../../utils/util')
+const util = require('../../utils/util.js')
 
 Page({
 
@@ -55,7 +55,7 @@ Page({
   viewComments: function()
   {
     wx.navigateTo({
-      url: '/pages/',
+      url: '/pages/comment/comment?' + 'id=' + this.data.movie.id + '&title=' + this.data.movie.title + '&image=' + this.data.movie.image
     })
   },
 

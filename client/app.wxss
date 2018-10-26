@@ -7,4 +7,17 @@
   box-sizing: border-box;
 } 
 
+.userinfo-avatar {
+    width: 100rpx;
+    height: 100rpx;
+    margin: 20rpx;
+    border-radius: 50%;
+}
+
+.userinfo-nickname {
+    font-size: 32rpx;
+    color: #007AFF;
+    background-color: white; 
+}
+
 
