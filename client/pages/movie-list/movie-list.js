@@ -1,6 +1,6 @@
-var qcloud = require('../../vendor/wafer2-client-sdk/index')
-var config = require('../../config')
-var util = require('../../utils/util.js')
+const qcloud = require('../../vendor/wafer2-client-sdk/index')
+const config = require('../../config')
+const util = require('../../utils/util.js')
 
 Page({
 
@@ -25,14 +25,9 @@ Page({
     qcloud.request({
       url: config.service.movieListUrl,
       login: false,
-      success(result) {   
-        let list = result.data.data
-        //format date using moment lib
-        list.forEach(function (item) {
-          item.create_time = util.formatDate(new Date(item.create_time))
-        });   
+      success(result) {      
         that.setData({          
-          movieList: list
+          movieList: result.data.data
         })
       },
       fail(error) {

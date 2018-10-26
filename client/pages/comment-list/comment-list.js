@@ -1,6 +1,8 @@
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const config = require('../../config')
 const util = require('../../utils/util.js')
+//use moment.js for date format
+const moment = require("../../utils/moment-with-locales.min.js")
 
 Page({
 
@@ -40,14 +42,20 @@ Page({
         if (!data.code) {
           this.setData({
             commentList: data.data.map(item => {
-              item.createTime = util.formatTime(new Date(item.create_time))
+              item.fromNow = moment(item.create_time).locale('zh_cn').fromNow()
               return item
             })
           })
-          console.log(this.data.commentList)
         }
       },
     })
   },
+
+  toCommentDetail: function (e){
+    wx.navigateTo({
+      url: '/pages/comment-detail/comment-detail?' + 'movie=' + JSON.stringify(this.data.movie) + '&comment=' + JSON.stringify(this.data.commentList[e.currentTarget.dataset.index]),
+    })
+  }
+  
 
 })

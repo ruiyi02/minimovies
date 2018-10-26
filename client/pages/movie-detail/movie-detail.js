@@ -55,7 +55,7 @@ Page({
   viewComments: function()
   {
     wx.navigateTo({
-      url: '/pages/comment/comment?' + 'id=' + this.data.movie.id + '&title=' + this.data.movie.title + '&image=' + this.data.movie.image
+      url: '/pages/comment-list/comment-list?' + 'id=' + this.data.movie.id + '&title=' + this.data.movie.title + '&image=' + this.data.movie.image
     })
   },
 

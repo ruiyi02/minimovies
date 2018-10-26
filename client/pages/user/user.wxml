@@ -14,7 +14,7 @@
     </view>
 
     <view class="uploader">
-        <navigator url="../list/list" open-type="navigate" class="uploader-text">
+        <navigator url="../movie-list/movie-list" open-type="navigate" class="uploader-text">
             <text>热门电影</text>
         </navigator>
     </view>

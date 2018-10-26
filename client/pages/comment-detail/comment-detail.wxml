@@ -1,0 +1,29 @@
+<view class="page"> 
+  <view class="page__bd">  
+          <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__hd">
+                <image class="weui-article__img" src="{{movie.image}}" mode="aspectFit" style="width: 680rpx" />
+            </view>
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__h1">{{movie.title}}</view>                    
+                </view>  
+
+                <view class="weui-panel">
+                    <view class="weui-panel__hd">
+                      <image src="{{comment.avatar}}" class="userinfo-avatar" style="width:50rpx; height: 50rpx;"></image>
+                    </view>
+                    <view class="weui-panel__bd">
+                        <view class="weui-media-box weui-media-box_text">
+                            <view class="weui-media-box__desc">{{comment.content}}</view>
+                            <view class="weui-media-box__info">
+                                <view class="weui-media-box__info__meta">{{comment.fromNow}}</view>                                                 </view>
+                        </view>
+                    </view>
+                </view>
+              
+            </view>           
+          </view>
+    </view>
+</view>
+

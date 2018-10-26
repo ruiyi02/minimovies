@@ -1,0 +1,27 @@
+<view class="page"> 
+  <view class="page__bd">  
+          <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__hd">
+                <image class="weui-article__img" src="{{movie.image}}" mode="aspectFit" style="width: 680rpx" />
+            </view>
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__h1">{{movie.title}}</view>                    
+                </view>  
+
+                <view class="weui-cells__title">{{commentList.length}}条影评</view>
+                <view class="weui-cells weui-cells_after-title">
+                  <view wx:for="{{commentList}}" wx:key="*this" data-index="{{index}}" bindtap='toCommentDetail' class="weui-cell weui-cell_access" hover-class="weui-cell_active">                   
+                        <view class="weui-cell__hd">
+                          <image src="{{item.avatar}}" class="userinfo-avatar" style="width:50rpx; height: 50rpx;"></image>
+                        </view>
+                        <view class="weui-cell__bd">
+                        {{item.username}}:  {{item.content}}
+                        </view>                     
+                        <view class="weui-cell__ft">{{item.fromNow}}</view>                
+                  </view>           
+                </view>          
+            </view>           
+          </view>
+    </view>
+</view>
