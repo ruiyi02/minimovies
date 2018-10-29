@@ -45,6 +45,24 @@ ALTER TABLE `comments`
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `faverite_comments`
+--
+
+CREATE TABLE `favorite_comments` (
+  `user` varchar(255) NOT NULL,
+  `comment_id` int(11) NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `favorite_comments`
+  ADD CONSTRAINT `favorite_comment_link` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`id`);
+
+
+ALTER TABLE `favorite_comments`
+  ADD KEY `favorite_comment_user` (`user`);
+-- --------------------------------------------------------
+
+--
 -- 加电影数据
 --
 

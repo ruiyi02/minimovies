@@ -46,5 +46,10 @@ router.put('/comment', validationMiddleware, controllers.comment.add)
 // 获取评论列表
 router.get('/comment', controllers.comment.list)
 
+// 添加收藏评论
+router.put('/favorite', validationMiddleware, controllers.favorite.add)
+
+// 获取收藏评论列表
+router.get('/favorite', controllers.favorite.list)
 
 module.exports = router

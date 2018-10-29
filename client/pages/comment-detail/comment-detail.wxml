@@ -20,9 +20,18 @@
                                 <view class="weui-media-box__info__meta">{{comment.fromNow}}</view>                                                 </view>
                         </view>
                     </view>
+                </view>              
+            </view> 
+              <view class="weui-panel__ft">
+              <view class="weui-flex">
+                <view class="weui-flex__item">
+                    <button class="weui-btn" type="primary" plain="true" bindtap='addFavorite'>收藏影评</button>
                 </view>
-              
-            </view>           
+                <view class="weui-flex__item">
+                    <button class="weui-btn" type="primary" plain="true" bindtap='addComment'>添加影评</button> 
+                </view>                 
+              </view>                          
+            </view>          
           </view>
     </view>
 </view>

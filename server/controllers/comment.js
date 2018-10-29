@@ -31,5 +31,5 @@ module.exports = {
     } else {
       ctx.state.data = []
     }
-  },
+  }
 }

@@ -25,6 +25,12 @@ var config = {
 
         // 获取评论列表
         commentListUrl: `${host}/weapp/comment`,
+
+        // 获取收藏的评论列表
+        favoriteListUrl: `${host}/weapp/favorite`,
+
+        // 添加收藏评论
+        addFavoritetUrl: `${host}/weapp/favorite`
     }
 };
 

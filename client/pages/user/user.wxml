@@ -17,5 +17,8 @@
         <navigator url="../movie-list/movie-list" open-type="navigate" class="uploader-text">
             <text>热门电影</text>
         </navigator>
+         <navigator url="../favorite/favorite" open-type="navigate" class="uploader-text">
+            <text>我的收藏</text>
+        </navigator>
     </view>
 </view>
