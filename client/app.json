@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/user/user",
     "pages/movie-list/movie-list",
     "pages/movie-detail/movie-detail",
@@ -14,5 +15,21 @@
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "看看侃侃电影",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/movie-list/movie-list",
+        "text": "热门"      
+      },
+      {
+        "text": "我的收藏",
+        "pagePath": "pages/favorite/favorite"     
+      }
+    ]
   }
 }

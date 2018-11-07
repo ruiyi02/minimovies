@@ -8,17 +8,8 @@
             background-size="cover"
         ></image>
         <view>
-            <button class="userinfo-nickname" wx:if="{{!logged}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">点击测试登录接口</button>
+            <button class="userinfo-nickname" wx:if="{{!logged}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">微信登录</button>
             <text class="userinfo-nickname" wx:else>{{userInfo.nickName}}</text>
         </view>
-    </view>
-
-    <view class="uploader">
-        <navigator url="../movie-list/movie-list" open-type="navigate" class="uploader-text">
-            <text>热门电影</text>
-        </navigator>
-         <navigator url="../favorite/favorite" open-type="navigate" class="uploader-text">
-            <text>我的收藏</text>
-        </navigator>
     </view>
 </view>

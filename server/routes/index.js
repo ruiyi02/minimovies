@@ -49,7 +49,10 @@ router.get('/comment', controllers.comment.list)
 // 添加收藏评论
 router.put('/favorite', validationMiddleware, controllers.favorite.add)
 
+// 删除收藏评论
+router.delete('/favorite', validationMiddleware, controllers.favorite.delete)
+
 // 获取收藏评论列表
-router.get('/favorite', controllers.favorite.list)
+router.get('/favorite', validationMiddleware, controllers.favorite.list)
 
 module.exports = router

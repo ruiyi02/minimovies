@@ -3,20 +3,19 @@
           <view class="weui-panel weui-panel_access">          
             <view class="weui-panel__bd">
                 <view class="weui-media-box weui-media-box_text">
-                    <view class="weui-media-box__h1">{{movie.title}}</view>                    
-                </view>  
+                    <view class="weui-media-box__h1">{{movie.title}}</view>                       </view>  
 
                 <view class="weui-cells__title">{{commentList.length}}条影评</view>
                 <view class="weui-cells weui-cells_after-title">
-                  <view wx:for="{{commentList}}" wx:key="*this" data-index="{{index}}" bindtap='toCommentDetail' class="weui-cell weui-cell_access" hover-class="weui-cell_active">                   
+                  <navigator wx:for="{{commentList}}" wx:key="*this" url="{{item.url}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">                   
                         <view class="weui-cell__hd">
                           <image src="{{item.avatar}}" class="userinfo-avatar" style="width:50rpx; height: 50rpx;"></image>
                         </view>
                         <view class="weui-cell__bd">
                         {{item.username}}:  {{item.content}}
                         </view>                     
-                        <view class="weui-cell__ft">{{item.fromNow}}</view>                
-                  </view>           
+                        <view class="weui-cell__ft">{{item.fromNow}}</view>
+                        <view wx:if="{{item.is_favorite}}" class="weui-cell__ft">favorite</view>                                </navigator>           
                 </view>          
             </view>           
           </view>

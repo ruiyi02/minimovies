@@ -43,6 +43,7 @@ Page({
           this.setData({
             commentList: data.data.map(item => {
               item.fromNow = moment(item.create_time).locale('zh_cn').fromNow()
+              item.url = this.getDetailUrl(item)
               return item
             })
           })
@@ -51,11 +52,8 @@ Page({
     })
   },
 
-  toCommentDetail: function (e){
-    wx.navigateTo({
-      url: '/pages/comment-detail/comment-detail?' + 'movie=' + JSON.stringify(this.data.movie) + '&comment=' + JSON.stringify(this.data.commentList[e.currentTarget.dataset.index]),
-    })
+  getDetailUrl: function(comment){
+    return '/pages/comment-detail/comment-detail?' + 'movie=' + JSON.stringify(this.data.movie) + '&comment=' + JSON.stringify(comment)
   }
   
-
 })

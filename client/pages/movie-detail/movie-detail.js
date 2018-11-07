@@ -52,8 +52,7 @@ Page({
   },
 
  //navigate to comment list page
-  viewComments: function()
-  {
+  viewComments: function(){
     wx.navigateTo({
       url: '/pages/comment-list/comment-list?' + 'id=' + this.data.movie.id + '&title=' + this.data.movie.title + '&image=' + this.data.movie.image
     })
