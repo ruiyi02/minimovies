@@ -1,13 +1,13 @@
 {
-  "pages": [
+  "pages": [ 
     "pages/index/index",
-    "pages/user/user",
     "pages/movie-list/movie-list",
+    "pages/favorite/favorite",
     "pages/movie-detail/movie-detail",
     "pages/add-comment/add-comment",
     "pages/comment-list/comment-list",
-    "pages/comment-detail/comment-detail",
-    "pages/favorite/favorite"        
+    "pages/comment-detail/comment-detail",   
+    "pages/user/user"       
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -17,18 +17,22 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "list": [
+    "color": "#a9b7b7",
+    "selectedColor": "#4aa3fa",
+    "borderStyle": "white",
+    "backgroundColor": "#fff",
+    "list": [ 
       {
-        "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "首页",
+        "pagePath": "pages/index/index"
       },
       {
-        "pagePath": "pages/movie-list/movie-list",
-        "text": "热门"      
-      },
+        "text": "热门",
+        "pagePath": "pages/movie-list/movie-list"             
+      },     
       {
         "text": "我的收藏",
-        "pagePath": "pages/favorite/favorite"     
+        "pagePath": "pages/favorite/favorite"         
       }
     ]
   }

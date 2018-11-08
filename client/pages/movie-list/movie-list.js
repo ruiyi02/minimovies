@@ -25,12 +25,14 @@ Page({
     qcloud.request({
       url: config.service.movieListUrl,
       login: false,
-      success(result) {      
+      success: function(result) { 
+        wx.hideToast()     
         that.setData({          
           movieList: result.data.data
-        })
+        })       
       },
-      fail(error) {
+      fail: function(error) {
+        wx.hideToast()
         util.showModel('请求失败', error);
         console.log('request fail', error);
       }

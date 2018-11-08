@@ -20,19 +20,17 @@ Page({
 
   //function to get the movie detail based id
   getMovie: function(id) {
-    wx.showLoading({
-      title: '电影内容加载中...',
-    })
-
+    util.showBusy('电影内容加载中...') 
+    var that = this
     qcloud.request({
       url: config.service.movieDetailUrl + id,
-      success: result => {
-        wx.hideLoading()
+      success: function(result) {
+        wx.hideToast()
 
         let data = result.data
 
         if (!data.code) {
-          this.setData({
+          that.setData({
             movie: data.data
           })
         } else {
@@ -41,9 +39,8 @@ Page({
           }, 2000)
         }
       },
-      fail: () => {
-        wx.hideLoading()
-
+      fail: function() {
+        wx.hideToast()
         setTimeout(() => {
           wx.navigateBack()
         }, 2000)

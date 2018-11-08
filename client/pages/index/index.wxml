@@ -6,11 +6,11 @@
             </view>
             <view class="weui-panel__bd">
                 <view class="weui-media-box weui-media-box_text">
-                    <view class="weui-media-box__h1">{{movie.movie.title}}</view>                    
+                    <view class="weui-media-box__h1">{{movie.title}}</view>                    
                 </view>  
                 <view class="weui-panel">
                     <view class="weui-panel__hd">
-                      <image src="{{comment.avatar}}" class="userinfo-avatar" style="width:50rpx; height: 50rpx;"></image>
+                      <image src="{{movie.comment.avatar}}" class="userinfo-avatar" style="width:50rpx; height: 50rpx;"></image>
                     </view>
                     <view class="weui-panel__bd">
                         <view class="weui-media-box weui-media-box_text">

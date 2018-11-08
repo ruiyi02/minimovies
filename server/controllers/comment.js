@@ -32,7 +32,7 @@ module.exports = {
         let user = ctx.state.$wxInfo.userinfo.openId
         ctx.state.data = await DB.query('select comments.*, IFNULL(favorite_comments.comment_id, 0) as favorite_comment_id from comments left join favorite_comments on favorite_comments.comment_id=comments.id and favorite_comments.user=? where comments.movie_id = ?', [user, movieId])
       }else
-        ctx.state.data = await DB.query('select comments.*, 0 from comments where comments.movie_id = ?', [movieId])
+        ctx.state.data = await DB.query('select comments.*, 0 as favorite_comment_id from comments where comments.movie_id = ?', [movieId])
     } else {
       ctx.state.data = []
     }

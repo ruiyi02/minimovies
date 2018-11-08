@@ -39,7 +39,7 @@ Page({
       },
       success: result => {
         let data = result.data   
-        if (!data.code) {
+        if (!data.code) {          
           this.setData({
             commentList: data.data.map(item => {
               item.fromNow = moment(item.create_time).locale('zh_cn').fromNow()
@@ -47,6 +47,7 @@ Page({
               return item
             })
           })
+          console.log(this.data.commentList)
         }
       },
     })

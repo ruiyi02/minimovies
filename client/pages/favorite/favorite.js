@@ -39,23 +39,32 @@ Page({
   },
 
   getFavoriteCommentList: function () {
+    util.showBusy('刷新我的收藏...')
+    var that = this
     qcloud.request({
       url: config.service.favoriteListUrl,  
       login: true,   
-      success: result => {
+      success: function(result) {
+        wx.hideToast()
         let data = result.data
         console.log(data.data)
         if (!data.code) {
-          this.setData({
+          that.setData({
             commentList: data.data.map(item => {
               item.fromNow = moment(item.create_time).locale('zh_cn').fromNow()
-              item.url = this.getDetailUrl(item)
+              item.url = that.getDetailUrl(item)
               return item
             })
           })
-          console.log(this.data.commentList)
+          console.log(that.data.commentList)
         }
       },
+
+      fail: function(error) {
+        wx.hideToast()
+        util.showModel('请求失败', error);
+        console.log('request fail', error);
+      }
     })
   },
 
