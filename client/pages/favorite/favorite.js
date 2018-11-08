@@ -23,9 +23,15 @@ Page({
 
   onShow: function(){
     let that=this
+    if (app.globalData.userInfo) {
+       console.log('useInfo exist')
+       that.getFavoriteCommentList()
+    }
+
     wx.checkSession({
       success: function () {
         //session_key 未过期，并且在本生命周期一直有效
+        console.log('session not expired yet!')
         that.getFavoriteCommentList()
       },
       fail: function () {
@@ -42,9 +48,9 @@ Page({
     util.showBusy('刷新我的收藏...')
     var that = this
     qcloud.request({
-      url: config.service.favoriteListUrl,  
-      login: true,   
-      success: function(result) {
+      url: config.service.favoriteListUrl,
+      login: true,
+      success: function (result) {
         wx.hideToast()
         let data = result.data
         console.log(data.data)
@@ -60,7 +66,7 @@ Page({
         }
       },
 
-      fail: function(error) {
+      fail: function (error) {
         wx.hideToast()
         util.showModel('请求失败', error);
         console.log('request fail', error);

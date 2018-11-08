@@ -26,9 +26,7 @@ Page({
       url: config.service.movieDetailUrl + id,
       success: function(result) {
         wx.hideToast()
-
         let data = result.data
-
         if (!data.code) {
           that.setData({
             movie: data.data

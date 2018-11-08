@@ -1,15 +1,14 @@
 <!--index.wxml-->
 <view class="container">
-    <!-- 用户登录测试 -->
+    <!-- 用户登录 -->
     <view class="userinfo">
         <image
             class="userinfo-avatar"
-            src="{{logged ? userInfo.avatarUrl : '/images/user-unlogin.png'}}"
+            src="/images/user-unlogin.png"
             background-size="cover"
         ></image>
         <view>
-            <button class="userinfo-nickname" wx:if="{{!logged}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">微信登录</button>
-            <text class="userinfo-nickname" wx:else>{{userInfo.nickName}}</text>
+            <button class="userinfo-nickname" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">微信登录</button>          
         </view>
     </view>
 </view>

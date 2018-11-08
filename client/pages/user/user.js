@@ -5,28 +5,23 @@ var util = require('../../utils/util.js')
 const app = getApp()
 
 Page({
-  data: {
-    userInfo: app.globalData.userInfo,
-    logged: app.globalData.logged
+  data: {   
   },
 
   // 用户登录示例
-  bindGetUserInfo: function () {
-    if (app.globalData.logged) return
-
+  bindGetUserInfo: function () {  
     util.showBusy('正在登录')
-
     const session = qcloud.Session.get()
 
     if (session) {
       // 第二次登录
       // 或者本地已经有登录态
       // 可使用本函数更新登录态
-      qcloud.loginWithCode({
+      console.log('qcloud.loginWithCode!')
+      qcloud.loginWithCode({       
         success: res => {
           app.globalData.userInfo=res
-          app.globalData.logged=true
-          this.setData({ userInfo: res, logged: true })
+          app.globalData.logged=true   
           util.showSuccess('登录成功')
           wx.navigateBack({});
         },
@@ -37,11 +32,11 @@ Page({
       })
     } else {
       // 首次登录
+      console.log('qcloud.login!')
       qcloud.login({
         success: res => {
           app.globalData.userInfo = res
-          app.globalData.logged = true
-          this.setData({ userInfo: res, logged: true })
+          app.globalData.logged = true    
           util.showSuccess('登录成功')
           wx.navigateBack({});
         },
