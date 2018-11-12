@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    preview: false,
     movie: {},
     comment: {}
   },
@@ -18,7 +19,8 @@ Page({
     this.setData(
       {
         movie: JSON.parse(options.movie),
-        comment: JSON.parse(options.comment)
+        comment: JSON.parse(options.comment),
+        preview: options.preview
       }
     )
   },
@@ -60,6 +62,56 @@ Page({
         })
       }
     })
+  },
+
+  publishComment: function (event) {
+    let content = this.data.comment.content
+    if (!content) return
+
+    wx.showLoading({
+      title: '正在发表评论'
+    })
+
+    qcloud.request({
+      url: config.service.addCommentUrl,
+      login: true,
+      method: 'PUT',
+      data: {
+        content,
+        movie_id: this.data.movie.id
+      },
+      success: result => {
+        wx.hideLoading()
+
+        let data = result.data
+
+        if (!data.code) {
+          wx.showToast({
+            title: '发表评论成功'
+          })
+
+          setTimeout(() => {
+            wx.navigateBack()
+          }, 2000)
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '发表评论失败'
+          })
+        }
+      },
+      fail: () => {
+        wx.hideLoading()
+        wx.showToast({
+          icon: 'none',
+          title: '发表评论失败'
+        })
+      }
+    })
+  },
+
+  editComment: function() {
+   wx.navigateBack()
   },
 
   //navigate to add comment page

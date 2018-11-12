@@ -26,21 +26,24 @@ Page({
     if (app.globalData.userInfo) {
        console.log('useInfo exist')
        that.getFavoriteCommentList()
+    }else{
+       wx.checkSession({
+          success: function () {
+            //session_key 未过期，并且在本生命周期一直有效
+            console.log('session not expired yet!')
+            console.log(app.globalData.userInfo)
+            that.getFavoriteCommentList()
+          },
+          fail: function () {
+            // session_key 已经失效，需要重新执行登录流程
+            wx.navigateTo({
+              url: "/pages/user/user"
+            })
+          }
+      })
     }
 
-    wx.checkSession({
-      success: function () {
-        //session_key 未过期，并且在本生命周期一直有效
-        console.log('session not expired yet!')
-        that.getFavoriteCommentList()
-      },
-      fail: function () {
-        // session_key 已经失效，需要重新执行登录流程
-        wx.navigateTo({
-          url: "/pages/user/user"
-        })
-      }
-    })
+   
    
   },
 

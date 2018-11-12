@@ -1,6 +1,9 @@
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const config = require('../../config')
-const _ = require('../../utils/util')
+const util = require('../../utils/util.js')
+//use moment.js for date format
+const moment = require("../../utils/moment-with-locales.min.js")
+const app = getApp()
 
 Page({
 
@@ -26,56 +29,54 @@ Page({
     })
   },
 
+  onShow: function () {
+    let that = this
+    if (!app.globalData.userInfo) {
+      wx.checkSession({
+        success: function () {
+          //session_key 未过期，并且在本生命周期一直有效
+          console.log('session_key 未过期, qcloud.loginWithCode()')
+          qcloud.loginWithCode({
+            success: res => {
+              app.globalData.userInfo = res
+              app.globalData.logged = true     
+              console.log(app.globalData.userInfo)      
+            },
+            fail: err => {
+              console.error(err)
+              util.showModel('登录错误', err.message)
+            }
+          })
+        },
+        fail: function () {
+          // session_key 已经失效，需要重新执行登录流程
+          wx.navigateTo({
+            url: "/pages/user/user"
+          })
+        }
+      })
+    }
+
+
+  },
+
   onInput: function(event) {
     this.setData({
       commentValue: event.detail.value.trim()
     })
   },
 
-  addComment: function(event) {
-    let content = this.data.commentValue
-    if (!content) return
+  previewComment: function() {
+    let comment = {
+      content: this.data.commentValue,
+      username: app.globalData.userInfo.nickName,
+      avatar: app.globalData.userInfo.avatarUrl     
+    }
 
-    wx.showLoading({
-      title: '正在发表评论'
-    })
-
-    qcloud.request({
-      url: config.service.addCommentUrl,
-      login: true,
-      method: 'PUT',
-      data: {
-        content,
-        movie_id: this.data.movie.id
-      },
-      success: result => {
-        wx.hideLoading()
-
-        let data = result.data
-
-        if (!data.code) {
-          wx.showToast({
-            title: '发表评论成功'
-          })
-
-          setTimeout(() => {
-            wx.navigateBack()
-          }, 2000)
-        } else {
-          wx.showToast({
-            icon: 'none',
-            title: '发表评论失败'
-          })
-        }
-      },
-      fail: () => {
-        wx.hideLoading()
-        wx.showToast({
-          icon: 'none',
-          title: '发表评论失败'
-        })
-      }
+    wx.navigateTo({
+      url: '/pages/comment-detail/comment-detail?preview=true&' + 'movie=' + JSON.stringify(this.data.movie) + '&comment=' + JSON.stringify(comment),
     })
   }
+ 
   
 })

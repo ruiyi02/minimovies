@@ -15,7 +15,7 @@
                 </view>        
             </view>
             <view class="weui-panel__ft">          
-                <button class="weui-btn" disabled="{{!commentValue? true:false}}" type="primary" bindtap='addComment'>完成</button>              
+                <button class="weui-btn" disabled="{{!commentValue? true:false}}" type="primary" bindtap='previewComment'>完成</button>              
             </view>
         </view>
     </view>
