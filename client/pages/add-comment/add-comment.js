@@ -19,54 +19,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+    let movie = {
+      id: options.id,
+      title: options.title,     
+      image: options.image
+    }
+    this.setData({
+      movie: movie
+    })
   },
 
-  onShow: function (options) {
-    let that = this
-    if (!app.globalData.userInfo) {
-      wx.checkSession({
-        success: function () {
-          //session_key 未过期，并且在本生命周期一直有效
-          console.log('session_key 未过期, qcloud.loginWithCode()')
-          qcloud.loginWithCode({
-            success: res => {
-              app.globalData.userInfo = res
-              app.globalData.logged = true     
-              that.loadData(options)      
-            },
-            fail: err => {
-              console.error(err)
-              util.showModel('登录错误', err.message)
-              wx.navigateBack()
-            }
-          })
-        },
-        fail: function () {
-          // session_key 已经失效，需要重新执行登录流程
-          wx.navigateTo({
-            url: "/pages/user/user"
-          })
-        }
-      })
-    }else
-      that.loadData(options) 
+  onShow: function () {
+    app.checkSession({
+      successs: function() {
+
+      }
+    })  
+
   },
 
   onInput: function(event) {
     this.setData({
       commentValue: event.detail.value.trim()
-    })
-  },
-
-  loadData: function (options) {
-    let movie = {
-      id: options.id,
-      title: options.title,
-      image: options.image
-    }
-    this.setData({
-      movie: movie
     })
   },
 

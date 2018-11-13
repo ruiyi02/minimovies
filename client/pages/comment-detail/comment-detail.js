@@ -1,5 +1,6 @@
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const config = require('../../config')
+const app = getApp()
 
 Page({
 
@@ -20,13 +21,33 @@ Page({
       {
         movie: JSON.parse(options.movie),
         comment: JSON.parse(options.comment),
-        preview: options.preview
+        preview: options.preview || false
       }
     )
   },
 
+  //check login befire add as favorite
+  loginAndAddFavorite: function() {
+    let that = this
+    app.checkSession({
+      success: function () {
+        that.addFavorite()
+      }
+    })   
+  },
+
+  //check login befire add as favorite
+  loginAndDeleteFavorite: function () {
+    let that = this
+    app.checkSession({
+      success: function () {
+        that.deleteFavorite()
+      }
+    })
+  },
+
   //add favorite 
-  addFavorite: function (event) {      
+  addFavorite: function () {      
     wx.showLoading({
       title: '正在收藏评论'
     })
@@ -40,9 +61,7 @@ Page({
       },
       success: result => {
         wx.hideLoading()
-
         let data = result.data
-
         if (!data.code) {
           wx.showToast({
             title: '收藏评论成功'
@@ -64,7 +83,46 @@ Page({
     })
   },
 
+  //add favorite 
+  deleteFavorite: function () {
+    wx.showLoading({
+      title: '正在删除收藏'
+    })
+
+    qcloud.request({
+      url: config.service.deleteFavoritetUrl,
+      login: true,
+      method: 'DELETE',
+      data: {
+        comment_id: this.data.comment.id
+      },
+      success: result => {
+        wx.hideLoading()
+        let data = result.data
+        if (!data.code) {
+          wx.showToast({
+            title: '删除评论成功'
+          })
+          wx.navigateBack({})
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '删除评论失败'
+          })
+        }
+      },
+      fail: () => {
+        wx.hideLoading()
+        wx.showToast({
+          icon: 'none',
+          title: '删除评论失败'
+        })
+      }
+    })
+  },
+
   publishComment: function (event) {
+    let that = this
     let content = this.data.comment.content
     if (!content) return
 
@@ -91,9 +149,14 @@ Page({
           })
 
           setTimeout(() => {
-            // navigate back to movie detail page
+            // navigate back to movie detail page then to comment list page
             wx.navigateBack({
-              delta: 2
+              delta: 2,
+              success: function() {
+                wx.navigateTo({
+                  url: '/pages/comment-list/comment-list?' + 'id=' + that.data.movie.id + '&title=' + that.data.movie.title + '&image=' + that.data.movie.image
+                })
+              }
             })
           }, 2000)
         } else {

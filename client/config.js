@@ -30,7 +30,10 @@ var config = {
         favoriteListUrl: `${host}/weapp/favorite`,
 
         // 添加收藏评论
-        addFavoritetUrl: `${host}/weapp/favorite`
+        addFavoritetUrl: `${host}/weapp/favorite`,
+
+         // 删除收藏评论
+        deleteFavoritetUrl: `${host}/weapp/favorite`
     }
 };
 

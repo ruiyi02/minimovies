@@ -36,8 +36,8 @@
               <view wx:else>
                <view class="weui-flex">
                 <view class="weui-flex__item">
-                    <button wx:if="{{comment.is_favorite}}" class="weui-btn" type="primary" plain="true" bindtap='addFavorite'>删除收藏</button>
-                    <button wx:else class="weui-btn" type="primary" plain="true" bindtap='addFavorite'>加入收藏</button>
+                    <button wx:if="{{comment.is_favorite}}" class="weui-btn" type="primary" plain="true" bindtap='loginAndDeleteFavorite'>删除收藏</button>
+                    <button wx:else class="weui-btn" type="primary" plain="true" bindtap='loginAndAddFavorite'>加入收藏</button>
                 </view>
                 <view class="weui-flex__item">
                     <button class="weui-btn" type="primary" plain="true" bindtap='addComment'>添加影评</button> 
