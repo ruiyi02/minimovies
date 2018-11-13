@@ -91,7 +91,10 @@ Page({
           })
 
           setTimeout(() => {
-            wx.navigateBack()
+            // navigate back to movie detail page
+            wx.navigateBack({
+              delta: 2
+            })
           }, 2000)
         } else {
           wx.showToast({
@@ -120,5 +123,6 @@ Page({
       url: '/pages/add-comment/add-comment?' + 'id=' + this.data.movie.id + '&title=' + this.data.movie.title + '&image=' + this.data.movie.image,
     })
   }
+
  
 })

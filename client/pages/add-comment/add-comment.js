@@ -19,17 +19,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let movie = {
-      id: options.id,
-      title: options.title,     
-      image: options.image
-    }
-    this.setData({
-      movie: movie
-    })
+   
   },
 
-  onShow: function () {
+  onShow: function (options) {
     let that = this
     if (!app.globalData.userInfo) {
       wx.checkSession({
@@ -40,11 +33,12 @@ Page({
             success: res => {
               app.globalData.userInfo = res
               app.globalData.logged = true     
-              console.log(app.globalData.userInfo)      
+              that.loadData(options)      
             },
             fail: err => {
               console.error(err)
               util.showModel('登录错误', err.message)
+              wx.navigateBack()
             }
           })
         },
@@ -55,14 +49,24 @@ Page({
           })
         }
       })
-    }
-
-
+    }else
+      that.loadData(options) 
   },
 
   onInput: function(event) {
     this.setData({
       commentValue: event.detail.value.trim()
+    })
+  },
+
+  loadData: function (options) {
+    let movie = {
+      id: options.id,
+      title: options.title,
+      image: options.image
+    }
+    this.setData({
+      movie: movie
     })
   },
 
