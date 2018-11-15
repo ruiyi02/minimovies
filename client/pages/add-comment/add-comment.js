@@ -30,12 +30,7 @@ Page({
   },
 
   onShow: function () {
-    app.checkSession({
-      successs: function() {
-
-      }
-    })  
-
+      
   },
 
   onInput: function(event) {

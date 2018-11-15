@@ -1,6 +1,7 @@
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const config = require('../../config')
 const util = require('../../utils/util.js')
+const app = getApp()
 
 Page({
 
@@ -50,6 +51,16 @@ Page({
   viewComments: function(){
     wx.navigateTo({
       url: '/pages/comment-list/comment-list?' + 'id=' + this.data.movie.id + '&title=' + this.data.movie.title + '&image=' + this.data.movie.image
+    })
+  },
+
+  //check login before navigate to add comment page
+  loginAndAddComment: function () {
+    let that = this
+    app.checkSession({
+      success: function () {
+        that.addComment()
+      }
     })
   },
 

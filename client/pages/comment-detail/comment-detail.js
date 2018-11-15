@@ -26,7 +26,7 @@ Page({
     )
   },
 
-  //check login befire add as favorite
+  //check login before add as favorite
   loginAndAddFavorite: function() {
     let that = this
     app.checkSession({
@@ -36,12 +36,22 @@ Page({
     })   
   },
 
-  //check login befire add as favorite
+  //check login before add as favorite
   loginAndDeleteFavorite: function () {
     let that = this
     app.checkSession({
       success: function () {
         that.deleteFavorite()
+      }
+    })
+  },
+
+  //check login before navigate to add comment page
+  loginAndAddComment: function () {
+    let that = this
+    app.checkSession({
+      success: function () {
+        that.addComment()
       }
     })
   },
@@ -179,7 +189,7 @@ Page({
   editComment: function() {
    wx.navigateBack()
   },
-
+  
   //navigate to add comment page
   addComment: function () {
     wx.navigateTo({

@@ -16,7 +16,12 @@
                         </view>                     
                         <view class="weui-cell__ft">{{item.fromNow}}</view>
                         <view wx:if="{{item.is_favorite}}" class="weui-cell__ft">favorite</view>                                </navigator>           
-                </view>          
+                </view>    
+                <view class="weui-flex">             
+                  <view class="weui-flex__item">
+                    <button class="weui-btn" type="primary" plain="true" bindtap='loginAndAddComment'>添加影评</button> 
+                  </view>                 
+               </view>      
             </view>           
           </view>
     </view>

@@ -3,6 +3,7 @@ const config = require('../../config')
 const util = require('../../utils/util.js')
 //use moment.js for date format
 const moment = require("../../utils/moment-with-locales.min.js")
+const app = getApp()
 
 Page({
 
@@ -55,6 +56,23 @@ Page({
 
   getDetailUrl: function(comment){
     return '/pages/comment-detail/comment-detail?' + 'movie=' + JSON.stringify(this.data.movie) + '&comment=' + JSON.stringify(comment)
+  },
+
+  //check login before navigate to add comment page
+  loginAndAddComment: function () {
+    let that = this
+    app.checkSession({
+      success: function () {
+        that.addComment()
+      }
+    })
+  },
+
+  //navigate to add comment page
+  addComment: function () {
+    wx.navigateTo({
+      url: '/pages/add-comment/add-comment?' + 'id=' + this.data.movie.id + '&title=' + this.data.movie.title + '&image=' + this.data.movie.image,
+    })
   }
   
 })

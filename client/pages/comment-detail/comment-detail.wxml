@@ -40,7 +40,7 @@
                     <button wx:else class="weui-btn" type="primary" plain="true" bindtap='loginAndAddFavorite'>加入收藏</button>
                 </view>
                 <view class="weui-flex__item">
-                    <button class="weui-btn" type="primary" plain="true" bindtap='addComment'>添加影评</button> 
+                    <button class="weui-btn" type="primary" plain="true" bindtap='loginAndAddComment'>添加影评</button> 
                 </view>                 
                </view>      
               </view> 
