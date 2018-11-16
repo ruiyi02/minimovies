@@ -36,5 +36,14 @@ module.exports = {
     } else {
       ctx.state.data = []
     }
+  },
+
+ /**
+   * 获一个随机评论
+   */
+  random: async ctx => {
+    ctx.state.data = (await DB.query("select comments.*, movies.title, movies.category, movies.image from comments join movies on movies.id=comments.movie_id order by RAND() limit 1"))[0]
   }
+
+
 }

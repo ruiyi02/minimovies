@@ -20,6 +20,9 @@ var config = {
         //get movie detail
         movieDetailUrl: `${host}/weapp/movie/`,
 
+        // 获取随机评论
+        commentRandomUrl: `${host}/weapp/comment/random`,
+
          // 添加评论
         addCommentUrl: `${host}/weapp/comment`,
 

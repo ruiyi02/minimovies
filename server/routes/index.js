@@ -21,6 +21,9 @@ router.get('/movie', controllers.movie.list)
 //get movie detail
 router.get('/movie/:id', controllers.movie.detail)
 
+//get a randow comment
+router.get('/comment/random', controllers.comment.random)
+
 // 添加评论
 router.put('/comment', validationMiddleware, controllers.comment.add)
 

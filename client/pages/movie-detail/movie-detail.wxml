@@ -9,19 +9,19 @@
                     <view class="weui-media-box__h1">{{movie.title}}</view>
                     <view class="weui-media-box__desc">类型： {{movie.category}}</view>
                 </view>  
-                  <view class="weui-article">  
+                  <view class="weui-article" style='margin-bottom: 120rpx'>  
                   <view class="weui-article__section">
                     <view class="weui-article__p">{{movie.description}}</view>
                   </view>
                 </view>        
             </view>
             <view class="weui-panel__ft">
-              <view class="weui-flex">
+              <view class="weui-flex btn-bottom">
                 <view class="weui-flex__item">
-                    <button class="weui-btn" type="primary" plain="true" bindtap='viewComments'>查看影评</button>
+                    <button class="weui-btn" type="primary" plain="true" style="width:98%" bindtap='viewComments'>查看影评</button>
                 </view>
                 <view class="weui-flex__item">
-                    <button class="weui-btn" type="primary" plain="true" bindtap='loginAndAddComment'>添加影评</button> 
+                    <button class="weui-btn" type="primary" plain="true" style="width:98%" bindtap='loginAndAddComment'>添加影评</button> 
                 </view>                 
               </view>                          
             </view>

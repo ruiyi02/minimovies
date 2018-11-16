@@ -1,17 +1,40 @@
+const qcloud = require('../../vendor/wafer2-client-sdk/index')
+const config = require('../../config')
+const util = require('../../utils/util.js')
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    movie: {}
+    comment: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getRandomComment()
+  },
 
-  }
+  //function to get a random comment
+  getRandomComment: function () {   
+    let that = this
+    qcloud.request({
+      url: config.service.commentRandomUrl,
+      success: function (result) {       
+        let data = result.data
+        console.log(data.data)
+        if (!data.code) {
+          that.setData({
+            comment: data.data
+          })
+        }
+      },
+      fail: function () {     
+      }
+    })
+  },
 
 })
