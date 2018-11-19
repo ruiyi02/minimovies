@@ -39,10 +39,18 @@ module.exports = {
   },
 
  /**
-   * 获一个随机评论
+   * 获取一个随机评论
    */
   random: async ctx => {
     ctx.state.data = (await DB.query("select comments.*, movies.title, movies.category, movies.image from comments join movies on movies.id=comments.movie_id order by RAND() limit 1"))[0]
+  },
+
+  /**
+   * 获取我的评论列表
+   */
+  published: async ctx => {
+    let user = ctx.state.$wxInfo.userinfo.openId
+    ctx.state.data = await DB.query("select comments.*, movies.title, movies.category, movies.image from comments join movies on movies.id=comments.movie_id and comments.user=? order by comments.create_time desc", [user])
   }
 
 

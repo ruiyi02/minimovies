@@ -23,6 +23,9 @@ var config = {
         // 获取随机评论
         commentRandomUrl: `${host}/weapp/comment/random`,
 
+        // 获取我的评论
+        commentPublishedUrl: `${host}/weapp/comment/published`,
+
          // 添加评论
         addCommentUrl: `${host}/weapp/comment`,
 

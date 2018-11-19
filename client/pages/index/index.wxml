@@ -1,19 +1,15 @@
 <view class="page"> 
   <view class="page__bd">  
-          <navigator  url="../movie-detail/movie-detail?id={{comment.movie_id}}" class="weui-panel weui-panel_access">
-            <view class="weui-panel__hd">
-                <image src="{{comment.image}}" mode="aspectFill" style="width: 700rpx; height: 800rpx" />
-            </view>
-            <view class="weui-panel__bd">
-                <view class="weui-media-box weui-media-box_text">
-                    <view class="weui-media-box__h1" >{{comment.title}}</view>                                  </view>  
-                <view class="weui-panel">
-                    <view class="weui-panel__hd">
-                      <image src="{{comment.avatar}}" class="userinfo-avatar" style="width:50rpx; height: 50rpx;"></image>
-                    </view> 
-                </view>                          
-            </view>         
-        </navigator>       
-    </view>
+    <navigator  url="../movie-detail/movie-detail?id={{comment.movie_id}}" >   
+      <view class="weui-media-box weui-media-box_text">
+          <image src="{{comment.image}}" mode="aspectFill" style="width: 700rpx; height: 800rpx" />
+          <view class="weui-media-box__h1" >{{comment.title}}</view>                                                  </view>  
+      <view class="weui-panel">
+          <view class="weui-panel__hd">
+            <image src="{{comment.avatar}}" class="userinfo-avatar" style="width:50rpx; height: 50rpx;"></image>
+          </view> 
+      </view>                         
+    </navigator>       
+  </view>
 </view>
 

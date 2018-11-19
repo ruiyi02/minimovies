@@ -10,11 +10,6 @@
                <view class="weui-media-box__desc">类型：{{item.category}}</view>
           </view>          
         </navigator>  
-      </view> 
-      <view wx:selsif="errorMessage!=''">
-          <view class="error-message">
-              <text>{{errorMessage}}</text>           
-          </view>                       
-      </view>                            
+      </view>                             
    </view>
 </view>

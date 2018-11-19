@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/movie-list/movie-list",
     "pages/favorite/favorite",
+    "pages/published/published",
     "pages/movie-detail/movie-detail",
     "pages/add-comment/add-comment",
     "pages/comment-list/comment-list",
@@ -33,6 +34,10 @@
       {
         "text": "我的收藏",
         "pagePath": "pages/favorite/favorite"         
+      },
+      {
+        "text": "我的评论",
+        "pagePath": "pages/published/published"
       }
     ]
   }
