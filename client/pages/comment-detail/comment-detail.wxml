@@ -1,20 +1,21 @@
 <view class="page"> 
   <view class="page__bd">  
-      <navigator url="../movie-detail/movie-detail?id={{movie.id}}" class="weui-media-box weui-media-box_text">
-        <image src="{{movie.image}}" mode="aspectFit" style="width: 680rpx" />
-        <view>{{movie.title}}</view>                                         
+      <navigator url="../movie-detail/movie-detail?id={{movie.id}}">
+        <view  class="movie-image">
+          <image src="{{movie.image}}" mode="aspectFit" style="width: 600rpx" />  
+        </view>       
+        <view class='movie-title'>{{movie.title}}</view>                           
       </navigator> 
-      <view class="weui-panel">
-          <view class="weui-panel__hd">
-            <image src="{{comment.avatar}}" class="userinfo-avatar" style="width:50rpx; height: 50rpx;"></image>
-          </view>
-          <view class="weui-panel__bd">
-              <view class="weui-media-box weui-media-box_text">
-                  <view class="weui-media-box__desc">{{comment.content}}</view>
-                    <view class="weui-media-box__info">
-                       <view class="weui-media-box__info__meta">{{comment.fromNow}}</view>                                           </view>
+          
+      <view class='comment-card'>
+        <image class='comment-avatar' src='{{comment.avatar}}'></image>
+        <view class='comment-cnt'>
+              <view class='comment-top'>
+                <view class='comment-username'>{{comment.username}}</view>
+                <view class="comment-time">{{comment.fromNow}}</view>
               </view>
-          </view>
+              <view class='comment-content'>{{comment.content}}</view>           
+        </view>     
       </view>             
       <view class="weui-panel__ft">
         <view wx:if="{{preview}}">
