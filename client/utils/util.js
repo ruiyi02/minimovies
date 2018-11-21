@@ -1,4 +1,6 @@
-const formatTime = date => {
+//use moment.js for date format
+  const moment = require("moment-with-locales.min.js")
+  const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -15,6 +17,10 @@ const formatDate = date => {
   const day = date.getDate()
   
   return [year, month, day].map(formatNumber).join('/')
+}
+
+const fromNowDate = date => {
+  return moment(date).locale('zh_cn').fromNow()
 }
 
 const formatNumber = n => {
@@ -47,4 +53,4 @@ var showModel = (title, content) => {
     })
 }
 
-module.exports = { formatTime, formatDate, showBusy, showSuccess, showModel }
+module.exports = { formatTime, formatDate, fromNowDate, showBusy, showSuccess, showModel }

@@ -3,7 +3,7 @@
   font-size: 25rpx;
   margin-top: 20rpx;
   height: 80rpx;
-  vertical-align: center;
+  align-items: center;
 }
 
 .comment-avatar {
@@ -16,7 +16,6 @@
 
 .comment-username {
   flex: 1;
-  vertical-align: center;
 }
 
 .comment-content {

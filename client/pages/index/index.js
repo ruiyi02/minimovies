@@ -27,8 +27,10 @@ Page({
         let data = result.data
         console.log(data.data)
         if (!data.code) {
+          let item = data.data
+          item.fromNow = util.fromNowDate(item.create_time)
           that.setData({
-            comment: data.data
+            comment: item
           })
         }
       },

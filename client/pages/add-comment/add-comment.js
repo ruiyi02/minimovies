@@ -1,8 +1,6 @@
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const config = require('../../config')
 const util = require('../../utils/util.js')
-//use moment.js for date format
-const moment = require("../../utils/moment-with-locales.min.js")
 const app = getApp()
 
 Page({

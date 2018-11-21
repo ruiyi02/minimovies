@@ -1,9 +1,6 @@
 .movie-title {
   padding: 25rpx 26rpx 14rpx;
-  font-size: 30rpx;
-  line-height: 42rpx;
-  color: rgba(29, 29, 38, 0.8);
-  font-weight: bold;  
+  line-height: 42rpx; 
   text-align: center;
 }
 
@@ -18,8 +15,6 @@
   padding: 25rpx 26rpx 14rpx;
   font-size: 30rpx;
   line-height: 42rpx;
-  color: rgba(29, 29, 38, 0.8);
-  font-weight: bold;
 }
 
 .comment-card {

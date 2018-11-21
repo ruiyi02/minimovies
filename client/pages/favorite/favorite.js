@@ -1,8 +1,6 @@
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const config = require('../../config')
 const util = require('../../utils/util.js')
-//use moment.js for date format
-const moment = require("../../utils/moment-with-locales.min.js")
 const app = getApp()
 
 Page({
@@ -44,7 +42,7 @@ Page({
         if (!data.code) {
           that.setData({
             commentList: data.data.map(item => {
-              item.fromNow = moment(item.create_time).locale('zh_cn').fromNow()
+              item.fromNow = util.fromNowDate(item.create_time)
               item.is_favorite = true
               item.url = that.getDetailUrl(item)              
               return item

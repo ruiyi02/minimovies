@@ -5,8 +5,7 @@
           <image src="{{movie.image}}" mode="aspectFit" style="width: 600rpx" />  
         </view>       
         <view class='movie-title'>{{movie.title}}</view>                           
-      </navigator> 
-          
+      </navigator>           
       <view class='comment-card'>
         <image class='comment-avatar' src='{{comment.avatar}}'></image>
         <view class='comment-cnt'>
