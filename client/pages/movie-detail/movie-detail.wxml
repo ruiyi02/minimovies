@@ -1,13 +1,13 @@
 <view class="page"> 
-  <view class="page__bd">     
-    <view class="weui-article" style='margin-bottom: 100rpx'>         
-        <image class="weui-article__img" src="{{movie.image}}" mode="aspectFit" style="width: 680rpx" />
-        <view class="weui-article__h1">{{movie.title}}</view>
-        <view class="weui-article__section">
-            <view class="weui-article__h3">类型： {{movie.category}}</view>
-            <view class="weui-article__p">{{movie.description}}</view>
-        </view>
-    </view>              
+  <view class="page__bd">   
+    <view class='content-above-btn'>
+      <view class='movie-image'>
+          <image class="" src="{{movie.image}}" mode="aspectFit" style="width: 680rpx" />
+      </view>  
+      <view class="movie-title">{{movie.title}}</view>
+      <view class="movie-category">{{movie.category}}</view>
+      <view class="movie-description">{{movie.description}}</view>    
+    </view>   
     <view class="weui-flex btn-bottom">
           <view class="weui-flex__item">
             <button class="weui-btn" type="primary" plain="true" style="width:98%" bindtap='viewComments'>查看影评</button>

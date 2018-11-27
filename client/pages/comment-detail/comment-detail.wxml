@@ -6,17 +6,17 @@
         </view>       
         <view class='movie-title'>{{movie.title}}</view>                           
       </navigator>           
-      <view class='comment-card'>
-        <image class='comment-avatar' src='{{comment.avatar}}'></image>
-        <view class='comment-cnt'>
-              <view class='comment-top'>
-                <view class='comment-username'>{{comment.username}}</view>
-                <view class="comment-time">{{comment.fromNow}}</view>
-              </view>
-              <view class='comment-content'>{{comment.content}}</view>           
-        </view>     
-      </view>             
-      <view class="weui-panel__ft">
+      <view class="comment-card content-above-btn">
+          <image class='comment-avatar' src='{{comment.avatar}}'></image>
+          <view class='comment-cnt'>
+            <view class='comment-top'>
+              <view class='comment-username'>{{comment.username}}</view>
+              <view class="comment-time">{{comment.fromNow}}</view>
+            </view>
+            <view class='comment-content'>{{comment.content}}</view>    
+          </view> 
+      </view>
+      <view wx:if="{{!comment.post_by_me}}">
         <view wx:if="{{preview}}">
           <view class="weui-flex btn-bottom">
             <view class="weui-flex__item">
@@ -37,8 +37,9 @@
                 <button class="weui-btn" type="primary" plain="true" style='width:98%' bindtap='loginAndAddComment'>添加影评</button> 
               </view>                 
             </view>      
-          </view> 
-        </view>          
-  </view>
+      </view> 
+      </view>                 
+
+   </view>
 </view>
 

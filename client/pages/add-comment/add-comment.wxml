@@ -5,14 +5,11 @@
           <image src="{{movie.image}}" mode="aspectFit" style="width: 600rpx" />  
         </view>       
         <view class='movie-title'>{{movie.title}}</view>                           
-      </navigator>  
-      <view class='comment-card'>     
-        <view class='comment-cnt'>
-            <textarea class='comment-content' placeholder='请填写你的评论' auto-focus maxlength='255' bindinput='onInput'></textarea>          
-        </view>     
-      </view>   
-      <view class="weui-panel__ft btn-bottom">          
-            <button class="weui-btn" type="primary" plain="true"  disabled="{{!commentValue? true:false}}" style="width: 99%" bindtap='previewComment'>完成</button>              
+      </navigator>       
+      <view class='comment-editor'>
+          <textarea class='comment-input' placeholder-class='comment-placeholder' placeholder='请填写你的评论'  auto-focus maxlength='500' bindinput='onInput'></textarea>          </view>     
+      <view class="btn-bottom">          
+          <button class="weui-btn" type="primary" plain="true"  disabled="{{!commentValue? true:false}}" style="width: 99%" bindtap='previewComment'>完成</button>              
       </view>
   </view>
 </view>

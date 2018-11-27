@@ -12,7 +12,7 @@
               <view class='comment-username'>{{comment.username}}</view>
               <view class="comment-time">{{comment.fromNow}}</view>
             </view>
-            <view class='comment-content'>{{comment.content}}</view>    
+            <view class='comment-content comment-content-short'>{{comment.content}}</view>    
           </view> 
       </view>                         
     </navigator>       

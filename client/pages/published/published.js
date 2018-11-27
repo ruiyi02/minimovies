@@ -43,7 +43,8 @@ Page({
           that.setData({
             commentList: data.data.map(item => {
               item.fromNow = util.fromNowDate(item.create_time)
-              item.url = that.getDetailUrl(item)
+              item.post_by_me = true         
+              item.url = that.getDetailUrl(item)              
               return item
             })
           })
@@ -64,7 +65,7 @@ Page({
       id: comment.movie_id,
       title: comment.title,
       category: comment.category,
-      image: comment.image
+      image: comment.image    
     }
 
     return '/pages/comment-detail/comment-detail?' + 'movie=' + JSON.stringify(movie) + '&comment=' + JSON.stringify(comment)

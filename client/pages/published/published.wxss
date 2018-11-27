@@ -1,32 +1,14 @@
 .comment-card {
-  display: flex;
-  font-size: 25rpx;
-  margin-top: 20rpx;
-  height: 80rpx;
   align-items: center;
-}
-
-.comment-avatar {
-  flex-shrink: 0;
-  width: 60rpx;
-  height: 60rpx;
-  border-radius: 50%;
-  margin-right: 10rpx
-}
-
-.comment-username {
-  flex: 1;
+  font-size: 28rpx;
+  padding: 30rpx 23rpx 0 0rpx; 
+  color: rgba(29, 29, 38, 0.5);
 }
 
 .comment-content {
-  margin-top: 20rpx;
-  font-size: 32rpx;
-  line-height: 40rpx;
-  color: #1D1D26;
-  overflow: hidden;
-  text-overflow:ellipsis;
-  display:-webkit-box;
-  -webkit-box-orient:vertical;
-  -webkit-line-clamp:2;
+  -webkit-line-clamp:1;
+}
 
+.comment-avatar {
+   margin-right: 10rpx
 }

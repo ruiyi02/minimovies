@@ -1,23 +1,32 @@
 /**app.wxss**/
 @import 'style/weui.wxss';
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-} 
 
-.userinfo-avatar {
-    width: 100rpx;
-    height: 100rpx;
-    margin: 20rpx;
-    border-radius: 50%;
+.movie-image {
+  display:flex; 
+  justify-content:center; 
+  margin-bottom: 20rpx;
+  margin-top: 20rpx;
 }
 
-.userinfo-nickname {
-    font-size: 32rpx;
-    color: #007AFF;
-    background-color: white; 
+.movie-title {
+  font-size: 36rpx;
+  line-height: 42rpx; 
+  text-align: center;
+  margin-bottom: 10rpx;
+}
+
+.movie-category {
+  font-size: 30rpx;
+  line-height: 40rpx; 
+  text-align: center;
+  color: rgba(29, 29, 38, 0.5);
+}
+
+.movie-description {
+  font-size: 30rpx;
+  line-height: 46rpx; 
+  margin-top: 20rpx;
+  padding: 0rpx 40rpx;
 }
 
 .movie-poster{
@@ -26,6 +35,72 @@
     vertical-align: middle;
     width:200rpx; 
     height: 260rpx;
+}
+
+.comment-list {
+  margin-top: 16rpx;
+  margin-bottom: 120rpx;
+  background: #FFFFFF;
+  box-shadow: 0 2rpx 13rpx 5rpx rgba(0, 0, 0, 0.02);
+}
+
+.comment-title {
+  padding: 25rpx 26rpx 14rpx;
+  font-size: 30rpx;
+  line-height: 42rpx;
+}
+
+.comment-card {
+  display: flex;
+  padding: 30rpx 23rpx 0 26rpx;
+}
+
+.comment-avatar {
+  flex-shrink: 0;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+}
+
+.comment-cnt {
+  flex: 1;
+  margin-left: 24rpx;
+  padding-bottom: 30rpx;
+  border-bottom: 1px solid rgba(151, 151, 151, 0.2);
+}
+
+.comment-top {
+  display: flex;
+  font-size: 30rpx;
+  line-height: 36rpx;
+  color: rgba(29, 29, 38, 0.5);
+}
+
+.comment-username {
+  flex: 1;
+}
+
+.comment-content {
+  margin-top: 16rpx;
+  font-size: 30rpx;
+  line-height: 46rpx;
+  color: #1D1D26;
+}
+
+.comment-content-short {
+  overflow: hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
+
+.comment-card:last-child .comment-cnt {
+  border-bottom: none;
+}
+
+.content-above-btn {
+  margin-bottom: 124rpx;
 }
 
 .btn-bottom {  
