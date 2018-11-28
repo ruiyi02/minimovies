@@ -8,6 +8,17 @@ Page({
   data: {  
   },
 
+  //监听返回键和navigateBack事件
+  onUnload: function () {
+    let pages = getCurrentPages();
+    let prevPage = pages[pages.length - 2];   
+    if (prevPage.route == "pages/user/user"){
+      wx.switchTab({
+        url: '/pages/index/index',
+      })
+    }   
+  },
+
   // 用户登录示例
   bindGetUserInfo: function () {     
     const session = qcloud.Session.get()

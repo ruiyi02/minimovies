@@ -38,6 +38,7 @@ Page({
   },
 
   onShow: function(){
+    console.log('user page showing')
     let that=this
     app.checkSession({
       success: function () {
