@@ -67,14 +67,11 @@ Page({
   },
 
   getCommentList: function () {
-    if (this.data.activeTabIndex ==0){
-      util.showBusy('刷新我的收藏...')
-     
-    }else{
-      util.showBusy('刷新我的评论...')
- 
-    }
-    
+    if (this.data.activeTabIndex ==0)
+      util.showBusy('刷新我的收藏...')     
+    else
+      util.showBusy('刷新我的评论...') 
+        
     var that = this
     qcloud.request({
       url: this.data.activeTabIndex == 0 ? config.service.favoriteListUrl : config.service.commentPublishedUrl,
@@ -87,7 +84,7 @@ Page({
           that.setData({
             commentList: data.data.map(item => {
               item.fromNow = util.fromNowDate(item.create_time)
-              item.is_favorite = true
+              item.is_favorite = that.data.activeTabIndex == 0
               item.url = that.getDetailUrl(item)              
               return item
             })
