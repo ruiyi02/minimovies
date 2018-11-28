@@ -17,7 +17,7 @@
         </view>
     </view>     
     <view class="btn-bottom">            
-        <button class="weui-btn" style="width:99%" type="primary" plain="true" bindtap='loginAndAddComment'>添加影评</button> 
+        <button style="width:99%" type="primary" plain="true" bindtap='loginAndAddComment'>添加影评</button> 
     </view>         
    </view>
 </view>

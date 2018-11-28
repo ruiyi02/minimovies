@@ -45,7 +45,7 @@ App({
         fail: () => {
           // session_key 已经失效，需要重新执行登录流程
           wx.navigateTo({
-            url: "/pages/user/user"
+            url: "/pages/login/login"
           })
         }
       })

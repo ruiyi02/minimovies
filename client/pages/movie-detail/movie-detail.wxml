@@ -10,10 +10,10 @@
     </view>   
     <view class="weui-flex btn-bottom">
           <view class="weui-flex__item">
-            <button class="weui-btn" type="primary" plain="true" style="width:98%" bindtap='viewComments'>查看影评</button>
+            <button  type="primary" plain="true" style="width:98%" bindtap='viewComments'>查看影评</button>
           </view>
           <view class="weui-flex__item">
-             <button class="weui-btn" type="primary" plain="true" style="width:98%" bindtap='loginAndAddComment'>添加影评</button> 
+             <button type="primary" plain="true" style="width:98%" bindtap='loginAndAddComment'>添加影评</button> 
           </view>                 
       </view>                         
     </view>

@@ -1,35 +1,14 @@
-
-.userinfo {
-    margin-top: 40rpx;
-    height: 140rpx;
-    width: 100%;
-    background: #FFF;
-    border: 1px solid rgba(0, 0, 0, .1);
-    border-left: none;
-    border-right: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    transition: all 300ms ease;
+.comment-card {
+  align-items: center;
+  font-size: 28rpx;
+  padding: 30rpx 23rpx 0 0rpx; 
+  color: rgba(29, 29, 38, 0.5);
 }
 
-.userinfo-avatar {
-    width: 100rpx;
-    height: 100rpx;
-    margin: 20rpx;
-    border-radius: 50%;
+.comment-content {
+  -webkit-line-clamp:1;
 }
 
-.userinfo-nickname {
-    font-size: 32rpx;
-    color: #007AFF;
-    background-color: white; 
-}
-
-.userinfo-nickname::after {
-  border: none;
-}
-
-.disable {
-    color: #888;
+.comment-avatar {
+   margin-right: 10rpx
 }

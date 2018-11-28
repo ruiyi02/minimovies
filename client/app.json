@@ -2,13 +2,12 @@
   "pages": [ 
     "pages/index/index",
     "pages/movie-list/movie-list",
-    "pages/favorite/favorite",
-    "pages/published/published",
+    "pages/user/user",   
     "pages/movie-detail/movie-detail",
     "pages/add-comment/add-comment",
     "pages/comment-list/comment-list",
     "pages/comment-detail/comment-detail",   
-    "pages/user/user"       
+    "pages/login/login"       
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -25,20 +24,22 @@
     "list": [ 
       {
         "text": "首页",
-        "pagePath": "pages/index/index"
+        "pagePath": "pages/index/index",
+        "selectedIconPath": "images/home-selected.png",
+        "iconPath": "images/home.png"
       },
       {
         "text": "热门",
-        "pagePath": "pages/movie-list/movie-list"             
+        "pagePath": "pages/movie-list/movie-list",
+        "selectedIconPath": "images/hot-selected.png",
+        "iconPath": "images/hot.png"
       },     
       {
-        "text": "我的收藏",
-        "pagePath": "pages/favorite/favorite"         
-      },
-      {
-        "text": "我的评论",
-        "pagePath": "pages/published/published"
-      }
+        "text": "我的",
+        "pagePath": "pages/user/user",
+        "selectedIconPath": "images/user-selected.png",
+        "iconPath": "images/user.png"         
+      }     
     ]
   }
 }
