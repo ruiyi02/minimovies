@@ -13,9 +13,9 @@ Page({
     let pages = getCurrentPages();
     let prevPage = pages[pages.length - 2];   
     if (prevPage.route == "pages/user/user"){
-      wx.switchTab({
+      /*wx.switchTab({
         url: '/pages/index/index',
-      })
+      })*/
     }   
   },
 
