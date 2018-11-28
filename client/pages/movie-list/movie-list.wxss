@@ -3,3 +3,11 @@
   text-align: center
 }
 
+.comment-total{
+  margin-top: 20rpx;
+  font-size: 30rpx;
+  line-height: 40rpx; 
+  color: rgba(29, 29, 38, 0.5);
+}
+
+

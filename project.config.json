@@ -13,5 +13,6 @@
 	},
 	"appid": "wxe7ed4c463f941c66",
 	"projectname": "minimovies",
+	"compileType": "miniprogram",
 	"condition": {}
 }

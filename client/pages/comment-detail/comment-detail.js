@@ -24,6 +24,11 @@ Page({
         preview: options.preview || false
       }
     )
+
+    if(this.data.preview)
+      wx.setNavigationBarTitle({
+        title: '影评预览'
+      })
   },
 
   //check login before add as favorite
