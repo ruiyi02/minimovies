@@ -29,6 +29,7 @@ Page({
         if (!data.code) {
           let item = data.data
           item.fromNow = util.fromNowDate(item.create_time)
+          item.url = that.getDetailUrl(item)
           that.setData({
             comment: item
           })
@@ -38,5 +39,16 @@ Page({
       }
     })
   },
+
+  getDetailUrl: function (comment) {
+    let movie = {
+      id: comment.movie_id,
+      title: comment.title,
+      image: comment.image
+    }
+    return '/pages/comment-detail/comment-detail?' + 'movie=' + JSON.stringify(movie) + '&comment=' + JSON.stringify(comment)
+
+  }
+
 
 })

@@ -5,7 +5,8 @@
         <image src="{{comment.image}}" mode="aspectFill" style="width: 700rpx; height: 800rpx" />
       </view> 
       <view class="movie-title" >{{comment.title}}</view> 
-      <view class="comment-card">
+    </navigator>  
+    <navigator url="{{comment.url}}" class="comment-card">
           <image class='comment-avatar' src='{{comment.avatar}}'></image>
           <view class='comment-cnt'>
             <view class='comment-top'>
@@ -14,8 +15,7 @@
             </view>
             <view class='comment-content comment-content-short'>{{comment.content}}</view>    
           </view> 
-      </view>                         
-    </navigator>       
+    </navigator>             
   </view>
 </view>
 
