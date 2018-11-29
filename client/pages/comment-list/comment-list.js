@@ -30,13 +30,20 @@ Page({
     this.getCommentList(movie.id)
   },
 
+  onPullDownRefresh: function () {
+    this.getCommentList(this.data.movie.id)
+  },
+
   getCommentList: function(movieId) {
+    util.showBusy('下载影评列表...') 
     qcloud.request({
       url: config.service.commentListUrl,
       data: {
         movie_id: movieId
       },
       success: result => {
+        wx.hideToast()
+        wx.stopPullDownRefresh()
         let data = result.data   
         if (!data.code) {          
           this.setData({

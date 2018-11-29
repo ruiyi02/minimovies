@@ -19,6 +19,10 @@ Page({
     this.getMovieList()
   },
 
+  onPullDownRefresh: function () {  
+      this.getMovieList()
+  },
+
   getMovieList: function(){
     util.showBusy('下载热门电影...')
     var that = this
@@ -26,13 +30,15 @@ Page({
       url: config.service.movieListUrl,
       login: false,
       success: function(result) { 
-        wx.hideToast()     
+        wx.hideToast()    
+        wx.stopPullDownRefresh()    
         that.setData({          
           movieList: result.data.data
         })       
       },
       fail: function(error) {
-        wx.hideToast()
+        wx.hideToast()   
+        wx.stopPullDownRefresh()
         util.showModel('请求失败', error);
         console.log('request fail', error);
       }

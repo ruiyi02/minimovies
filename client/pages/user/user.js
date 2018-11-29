@@ -79,6 +79,7 @@ Page({
       login: true,
       success: function (result) {
         wx.hideToast()
+        wx.stopPullDownRefresh()
         let data = result.data
         console.log(data.data)
         if (!data.code) {
@@ -96,6 +97,7 @@ Page({
 
       fail: function (error) {
         wx.hideToast()
+        wx.stopPullDownRefresh()
         util.showModel('请求失败', error);
         console.log('request fail', error);
       }

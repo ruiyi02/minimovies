@@ -13,8 +13,7 @@ App({
     },
 
     checkSession({ success }) {
-      if (this.globalData.userInfo) {
-        
+      if (this.globalData.userInfo) {        
         return success && success({
           userInfo: this.globalData.userInfo
         })
