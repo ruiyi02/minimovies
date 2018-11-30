@@ -2,7 +2,7 @@
   <view class="page__bd">  
       <navigator url="../movie-detail/movie-detail?id={{movie.id}}">
         <view  class="movie-image">
-          <image src="{{movie.image}}" mode="aspectFit" style="width: 600rpx" />  
+          <image src="{{movie.image}}" mode="aspectFit" style="width: 200rpx" />  
         </view>       
         <view class='movie-title'>{{movie.title}}</view>                           
       </navigator>       

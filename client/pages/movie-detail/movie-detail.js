@@ -67,7 +67,7 @@ Page({
   //navigate to add comment page
   addComment: function () {
     wx.navigateTo({
-      url: '/pages/add-comment/add-comment?' + 'id=' + this.data.movie.id + '&title=' + this.data.movie.title + '&image=' + this.data.movie.image,
+      url: '/pages/add-voice-comment/add-voice-comment?' + 'id=' + this.data.movie.id + '&title=' + this.data.movie.title + '&image=' + this.data.movie.image,
     })
   }
 

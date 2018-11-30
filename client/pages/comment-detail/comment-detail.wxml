@@ -12,8 +12,11 @@
             <view class='comment-top'>
               <view class='comment-username'>{{comment.username}}</view>
               <view class="comment-time">{{comment.fromNow}}</view>
-            </view>
-            <view class='comment-content'>{{comment.content}}</view>    
+            </view>            
+            <view wx:if="voice">
+              <button bindtap='playVoice' type='primary'>播放</button>
+            </view>  
+             <view wx:else class='comment-content'>{{comment.content}}</view> 
           </view> 
       </view>
       <view wx:if="{{!comment.post_by_me}}">
@@ -23,7 +26,7 @@
               <button type="primary" plain="true"  style='width:98%' bindtap='editComment'>编辑</button>
             </view>
             <view class="weui-flex__item">
-                <button type="primary" plain="true"  style='width:98%' bindtap='publishComment'>发布</button> 
+                <button type="primary" plain="true"  style='width:98%' bindtap='uploadComment'>发布</button> 
             </view>                 
           </view>   
         </view>             

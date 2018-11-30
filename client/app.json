@@ -5,6 +5,7 @@
     "pages/user/user",   
     "pages/movie-detail/movie-detail",
     "pages/add-comment/add-comment",
+    "pages/add-voice-comment/add-voice-comment",
     "pages/comment-list/comment-list",
     "pages/comment-detail/comment-detail",   
     "pages/login/login"       

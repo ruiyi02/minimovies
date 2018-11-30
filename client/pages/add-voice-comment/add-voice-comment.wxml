@@ -1,0 +1,16 @@
+<view class="page"> 
+  <view class="page__bd">  
+      <navigator url="../movie-detail/movie-detail?id={{movie.id}}">
+        <view  class="movie-image">
+          <image src="{{movie.image}}" mode="aspectFit" style="width: 200rpx" />  
+        </view>       
+        <view class='movie-title'>{{movie.title}}</view>                           
+      </navigator>      
+      <view class="voice-btn" bindtouchstart="voiceStartRecord" bindtouchend="voiceEndRecord">
+        <image src="../../images/voice.png" width="64px" width="64px"></image>
+      </view>    
+      <view class="btn-bottom">          
+        <button class="weui-btn" type="primary" plain="true"  disabled="{{!voiceTempFilePath? true:false}}" style="width: 99%" bindtap='previewComment'>完成</button>              
+      </view>
+  </view>
+</view>

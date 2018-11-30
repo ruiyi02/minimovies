@@ -27,6 +27,8 @@ CREATE TABLE `comments` (
   `username` varchar(255) DEFAULT NULL,
   `avatar` varchar(255) NOT NULL,
   `content` varchar(511) CHARACTER SET utf8 DEFAULT NULL,
+  `voice` varchar(255) DEFAULT NULL,
+  `voice_duration` int(11) DEFAULT NULL,
   `movie_id` int(11) NOT NULL,
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -26,6 +26,9 @@ var config = {
         // 获取我的评论
         commentPublishedUrl: `${host}/weapp/comment/published`,
 
+        // 上传文件接口
+        uploadUrl: `${host}/weapp/upload`,
+
          // 添加评论
         addCommentUrl: `${host}/weapp/comment`,
 

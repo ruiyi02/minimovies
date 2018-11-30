@@ -2,6 +2,8 @@ const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const config = require('../../config')
 const app = getApp()
 
+const innerAudioContext = wx.createInnerAudioContext();
+
 Page({
 
   /**
@@ -9,6 +11,7 @@ Page({
    */
   data: {
     preview: false,
+    voice:false,
     movie: {},
     comment: {}
   },
@@ -21,7 +24,8 @@ Page({
       {
         movie: JSON.parse(options.movie),
         comment: JSON.parse(options.comment),
-        preview: options.preview || false
+        preview: options.preview || false,
+        voice: options.voice || false,
       }
     )
 
@@ -136,10 +140,12 @@ Page({
     })
   },
 
-  publishComment: function (event) {
+  publishComment: function () {
     let that = this
     let content = this.data.comment.content
-    if (!content) return
+    let voiceUrl = this.data.comment.voiceUrl
+    let voiceDuration = this.data.comment.voiceDuration
+    if (!content && !voiceUrl) return
 
     wx.showLoading({
       title: '正在发表评论'
@@ -151,6 +157,8 @@ Page({
       method: 'PUT',
       data: {
         content,
+        voiceUrl,
+        voiceDuration,
         movie_id: this.data.movie.id
       },
       success: result => {
@@ -191,6 +199,29 @@ Page({
     })
   },
 
+  // upload voice comment to server
+  uploadComment() { 
+    let that = this
+    if(this.data.voice){
+        wx.uploadFile({
+        url: config.service.uploadUrl,
+        filePath: this.data.comment.voiceTempFilePath,
+        name: 'file',
+        success: res => {
+          let data = JSON.parse(res.data)
+          if (!data.code) {
+            that.setData({
+              voiceUrl : data.data.imgUrl
+            })     
+            that.publishComment()    
+          }      
+        }
+      })
+    }else
+      this.publishComment()
+ 
+  },
+
   editComment: function() {
    wx.navigateBack()
   },
@@ -200,7 +231,16 @@ Page({
     wx.navigateTo({
       url: '/pages/add-comment/add-comment?' + 'id=' + this.data.movie.id + '&title=' + this.data.movie.title + '&image=' + this.data.movie.image,
     })
-  }
+  },
 
+  playVoice() {
+    console.log('play voice')
+    let voiceUrl = this.data.comment.voice
+    if(this.data.preview)
+      voiceUrl = this.data.comment.voiceTempFilePath
+    
+    innerAudioContext.src = voiceUrl;
+    innerAudioContext.play();   
+  }
  
 })
