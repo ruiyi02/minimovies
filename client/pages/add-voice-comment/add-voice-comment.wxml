@@ -6,9 +6,8 @@
         </view>       
         <view class='movie-title'>{{movie.title}}</view>                           
       </navigator>      
-      <view class="voice-btn" bindtouchstart="voiceStartRecord" bindtouchend="voiceEndRecord">
-        <image src="../../images/voice.png" width="64px" width="64px"></image>
-      </view>    
+      <button class="voice-btn" type="primary" plain="true" bindtouchstart="voiceStartRecord" bindtouchend="voiceEndRecord">按住说话
+      </button>    
       <view class="btn-bottom">          
         <button class="weui-btn" type="primary" plain="true"  disabled="{{!voiceTempFilePath? true:false}}" style="width: 99%" bindtap='previewComment'>完成</button>              
       </view>

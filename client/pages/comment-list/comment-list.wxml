@@ -11,13 +11,20 @@
                 <view class='comment-username'>{{item.username}}</view>
                 <view class="comment-time">{{item.fromNow}}</view>
               </view>
-              <view class='comment-content comment-content-short'>{{item.content}}</view>           
+              <view class='play-btn' wx:if="{{item.voice}}">
+                <button type='primary' plain='true'>{{item.voice_duration}}</button>
+              </view>  
+              <view wx:else class='comment-content comment-content-short'>{{item.content}}</view> 
             </view>
           </navigator>
         </view>
     </view>     
-    <view class="btn-bottom">            
-        <button style="width:99%" type="primary" plain="true" bindtap='loginAndAddComment'>添加影评</button> 
+    <view class= "weui-flex btn-bottom">            
+       <view class="weui-flex__item">
+          <picker bindchange="selectInputType" value="{{selectedInputIndex}}" range="{{inputOptions}}">
+            <button type="primary" plain="true" style="width:98%" >添加影评</button> 
+          </picker>
+        </view>    
     </view>         
    </view>
 </view>

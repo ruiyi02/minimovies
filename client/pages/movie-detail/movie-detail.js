@@ -9,7 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    movie: {}
+    movie: {},
+    inputOptions: ['文字','音频'],
+    selectedInputIndex: 0
   },
 
   /**
@@ -59,16 +61,27 @@ Page({
     let that = this
     app.checkSession({
       success: function () {
-        that.addComment()
+        that.toCommentEditor()
       }
     })
   },
 
   //navigate to add comment page
-  addComment: function () {
+  toCommentEditor: function () {
+    let pageUrl ='/pages/add-comment/add-comment'
+    if(this.data.selectedInputIndex==1)
+      pageUrl = '/pages/add-voice-comment/add-voice-comment'
     wx.navigateTo({
-      url: '/pages/add-voice-comment/add-voice-comment?' + 'id=' + this.data.movie.id + '&title=' + this.data.movie.title + '&image=' + this.data.movie.image,
+      url: pageUrl+'?id=' + this.data.movie.id + '&title=' + this.data.movie.title + '&image=' + this.data.movie.image,
     })
-  }
+  },
+
+  selectInputType: function (e) {
+    this.setData({
+      selectedInputIndex: e.detail.value
+    })
+
+    this.loginAndAddComment()
+  },
 
 })

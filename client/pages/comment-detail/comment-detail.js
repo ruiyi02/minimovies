@@ -11,9 +11,10 @@ Page({
    */
   data: {
     preview: false,
-    voice:false,
     movie: {},
-    comment: {}
+    comment: {},
+    inputOptions: ['文字', '音频'],
+    selectedInputIndex: 0
   },
 
   /**
@@ -25,9 +26,10 @@ Page({
         movie: JSON.parse(options.movie),
         comment: JSON.parse(options.comment),
         preview: options.preview || false,
-        voice: options.voice || false,
-      }
+      }      
     )
+
+    console.log(this.data.comment)
 
     if(this.data.preview)
       wx.setNavigationBarTitle({
@@ -60,9 +62,27 @@ Page({
     let that = this
     app.checkSession({
       success: function () {
-        that.addComment()
+        that.toCommentEditor()
       }
     })
+  },
+
+  //navigate to add comment page
+  toCommentEditor: function () {
+    let pageUrl = '/pages/add-comment/add-comment'
+    if (this.data.selectedInputIndex == 1)
+      pageUrl = '/pages/add-voice-comment/add-voice-comment'
+    wx.navigateTo({
+      url: pageUrl + '?id=' + this.data.movie.id + '&title=' + this.data.movie.title + '&image=' + this.data.movie.image,
+    })
+  },
+
+  selectInputType: function (e) {
+    this.setData({
+      selectedInputIndex: e.detail.value
+    })
+
+    this.loginAndAddComment()
   },
 
   //add favorite 
@@ -144,7 +164,7 @@ Page({
     let that = this
     let content = this.data.comment.content
     let voiceUrl = this.data.comment.voiceUrl
-    let voiceDuration = this.data.comment.voiceDuration
+    let voice_duration = this.data.comment.voice_duration
     if (!content && !voiceUrl) return
 
     wx.showLoading({
@@ -156,9 +176,9 @@ Page({
       login: true,
       method: 'PUT',
       data: {
-        content,
-        voiceUrl,
-        voiceDuration,
+        content: content,
+        voice: voiceUrl,
+        voice_duration: voice_duration,
         movie_id: this.data.movie.id
       },
       success: result => {
@@ -202,16 +222,21 @@ Page({
   // upload voice comment to server
   uploadComment() { 
     let that = this
-    if(this.data.voice){
+    if (this.data.comment.voiceTempFilePath){
+        wx.showLoading({
+          title: '上传音频'
+        })
         wx.uploadFile({
         url: config.service.uploadUrl,
         filePath: this.data.comment.voiceTempFilePath,
         name: 'file',
         success: res => {
+          wx.hideToast()
           let data = JSON.parse(res.data)
+          let comment_voice_url='comment.voiceUrl'
           if (!data.code) {
             that.setData({
-              voiceUrl : data.data.imgUrl
+              [comment_voice_url] : data.data.imgUrl //only update voiceUrl of comment
             })     
             that.publishComment()    
           }      
@@ -225,14 +250,7 @@ Page({
   editComment: function() {
    wx.navigateBack()
   },
-  
-  //navigate to add comment page
-  addComment: function () {
-    wx.navigateTo({
-      url: '/pages/add-comment/add-comment?' + 'id=' + this.data.movie.id + '&title=' + this.data.movie.title + '&image=' + this.data.movie.image,
-    })
-  },
-
+ 
   playVoice() {
     console.log('play voice')
     let voiceUrl = this.data.comment.voice
@@ -240,7 +258,14 @@ Page({
       voiceUrl = this.data.comment.voiceTempFilePath
     
     innerAudioContext.src = voiceUrl;
-    innerAudioContext.play();   
+    innerAudioContext.autoplay = true
+    innerAudioContext.onPlay(() => {
+      console.log('开始播放')
+    })
+    innerAudioContext.onError((res) => {
+      console.log(res.errMsg)
+      console.log(res.errCode)
+    })  
   }
  
 })

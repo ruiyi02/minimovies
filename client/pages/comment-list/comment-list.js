@@ -10,7 +10,9 @@ Page({
    */
   data: {
     movie: {},
-    commentList:[]
+    commentList:[],
+    inputOptions: ['文字', '音频'],
+    selectedInputIndex: 0
   },
 
   /**
@@ -48,7 +50,7 @@ Page({
         if (!data.code) {          
           this.setData({
             commentList: data.data.map(item => {
-              item.fromNow = util.fromNowDate(item.create_time)
+              item.fromNow = util.fromNowDate(item.create_time)              
               item.url = this.getDetailUrl(item)
               return item
             })
@@ -60,7 +62,7 @@ Page({
   },
 
   getDetailUrl: function(comment){
-    return '/pages/comment-detail/comment-detail?' + 'movie=' + JSON.stringify(this.data.movie) + '&comment=' + JSON.stringify(comment)
+    return '/pages/comment-detail/comment-detail?movie=' + JSON.stringify(this.data.movie) + '&comment=' + JSON.stringify(comment)
   },
 
   //check login before navigate to add comment page
@@ -68,16 +70,27 @@ Page({
     let that = this
     app.checkSession({
       success: function () {
-        that.addComment()
+        that.toCommentEditor()
       }
     })
   },
 
   //navigate to add comment page
-  addComment: function () {
+  toCommentEditor: function () {
+    let pageUrl = '/pages/add-comment/add-comment'
+    if (this.data.selectedInputIndex == 1)
+      pageUrl = '/pages/add-voice-comment/add-voice-comment'
     wx.navigateTo({
-      url: '/pages/add-comment/add-comment?' + 'id=' + this.data.movie.id + '&title=' + this.data.movie.title + '&image=' + this.data.movie.image,
+      url: pageUrl + '?id=' + this.data.movie.id + '&title=' + this.data.movie.title + '&image=' + this.data.movie.image,
     })
-  }
+  },
+
+  selectInputType: function (e) {
+    this.setData({
+      selectedInputIndex: e.detail.value
+    })
+
+    this.loginAndAddComment()
+  },
   
 })

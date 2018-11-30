@@ -80,8 +80,7 @@ Page({
       success: function (result) {
         wx.hideToast()
         wx.stopPullDownRefresh()
-        let data = result.data
-        console.log(data.data)
+        let data = result.data    
         if (!data.code) {
           that.setData({
             commentList: data.data.map(item => {
@@ -111,8 +110,8 @@ Page({
       category: comment.category,
       image: comment.image
     }
-    
-    return '/pages/comment-detail/comment-detail?' + 'movie=' + JSON.stringify(movie) + '&comment=' + JSON.stringify(comment)
+
+    return '/pages/comment-detail/comment-detail?movie=' + JSON.stringify(movie) + '&comment=' + JSON.stringify(comment)
   }
 
 })

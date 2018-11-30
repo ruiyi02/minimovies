@@ -46,7 +46,8 @@ Page({
       title: comment.title,
       image: comment.image
     }
-    return '/pages/comment-detail/comment-detail?' + 'movie=' + JSON.stringify(movie) + '&comment=' + JSON.stringify(comment)
+  
+    return '/pages/comment-detail/comment-detail?movie=' + JSON.stringify(movie) + '&comment=' + JSON.stringify(comment)
 
   }
 

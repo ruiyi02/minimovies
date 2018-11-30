@@ -12,11 +12,11 @@
             <view class='comment-top'>
               <view class='comment-username'>{{comment.username}}</view>
               <view class="comment-time">{{comment.fromNow}}</view>
-            </view>            
-            <view wx:if="voice">
-              <button bindtap='playVoice' type='primary'>播放</button>
-            </view>  
-             <view wx:else class='comment-content'>{{comment.content}}</view> 
+            </view>          
+            <view wx:if="{{comment.content}}" class='comment-content'>{{comment.content}}</view> 
+            <view class='play-btn' wx:else>
+              <button bindtap='playVoice' type='primary' plain='true'>{{comment.voice_duration}}</button>
+            </view> 
           </view> 
       </view>
       <view wx:if="{{!comment.post_by_me}}">
@@ -36,10 +36,12 @@
               <button wx:if="{{comment.is_favorite}}" type="primary" plain="true" style='width:98%' bindtap='loginAndDeleteFavorite'>删除收藏</button>
               <button wx:else type="primary" plain="true" style='width:98%' bindtap='loginAndAddFavorite'>加入收藏</button>
             </view>
-              <view class="weui-flex__item">
-                <button type="primary" plain="true" style='width:98%' bindtap='loginAndAddComment'>添加影评</button> 
-              </view>                 
-            </view>      
+            <view class="weui-flex__item">
+                <picker bindchange="selectInputType" value="{{selectedInputIndex}}" range="{{inputOptions}}">
+                  <button type="primary" plain="true" style="width:98%" >添加影评</button> 
+                </picker>
+            </view>                 
+          </view>      
       </view> 
       </view>                 
 

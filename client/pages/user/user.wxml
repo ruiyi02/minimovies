@@ -20,8 +20,11 @@
                         <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
                             <view class="weui-media-box__title">{{item.title}}</view>
                             <view class="weui-media-box__desc">{{item.category}}</view>
-                            <view class='comment-content comment-content-short'>{{item.content}}</view> 
-                            <view class='comment-card'>                  
+                            <view class='play-btn' wx:if="{{item.voice}}">
+                              <button type='primary' plain='true'>{{item.voice_duration}}</button>
+                            </view>  
+                            <view wx:else class='comment-content comment-content-short'>{{item.content}}</view> 
+                             <view class='comment-card'>                  
                                 <image class='comment-avatar' src='{{item.avatar}}'></image>
                                 <view class='comment-username'>{{item.username}}</view>
                                 <view class="comment-time">{{item.fromNow}}</view>                

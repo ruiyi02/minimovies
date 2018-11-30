@@ -14,7 +14,7 @@ Page({
   data: {
     movie: {},
     voiceTempFilePath: '',
-    voiceDuration: 0
+    voice_duration: 0
   },
 
   /**
@@ -34,12 +34,16 @@ Page({
     recorderManager.onStop(function (res) {
       // 不允许小于 1 秒
       if (res.duration < 1000) {
-        //util.showTips('录音过短');
+        wx.showToast({
+          title: "录音时间太短",
+          icon: "none",
+          duration: 1000
+        });
         return;
       }
       that.setData({
         voiceTempFilePath: res.tempFilePath,
-     // voiceDuration: (res.duration / 1000).toFixed(2)
+        voice_duration: Math.ceil(res.duration / 1000)
       })
       console.log(res.tempFilePath)     
     });
@@ -53,7 +57,7 @@ Page({
     console.log('start record');
     recorderManager.start({
       // 最大长度设置为 1 分钟
-      duration: 2 * 60 * 1000,
+      duration:  60 * 1000,
       // 格式
       format: 'mp3',
       sampleRate: 16000,
@@ -71,7 +75,7 @@ Page({
   previewComment: function () {
     let comment = {
       voiceTempFilePath: this.data.voiceTempFilePath,
-     // voiceDuration: this.data.voiceDuration,
+      voice_duration: this.data.voice_duration,
       username: app.globalData.userInfo.nickName,
       avatar: app.globalData.userInfo.avatarUrl
     }
