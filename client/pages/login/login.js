@@ -20,7 +20,8 @@ Page({
   },
 
   // 用户登录示例
-  bindGetUserInfo: function () {     
+  bindGetUserInfo: function () {    
+    let that = this 
     const session = qcloud.Session.get()
     if (session) {
       // 第二次登录
@@ -53,6 +54,8 @@ Page({
                 app.globalData.userInfo = res
                 app.globalData.logged = true
                 util.showSuccess('登录成功')
+                //dowload user data and set to storage
+                that.getUserCommentList()
                 wx.navigateBack({});
               },
               fail: err => {
@@ -64,5 +67,44 @@ Page({
         }       
       })
     }
-  }
+  },
+
+  getUserCommentList: function () {
+    util.showBusy('刷新用户数据...')  
+    //get favorite list and set storage
+    app.getUserData(app.globalData.USER_DATA_TYPES[0],
+      {
+        success: ({ commentList }) => {
+          wx.hideToast()
+          wx.setStorage({
+            key: app.globalData.USER_DATA_TYPES[0],
+            data: commentList.map(item => {
+              item.fromNow = util.fromNowDate(item.create_time)
+              item.is_favorite = true
+              item.url = app.getDetailUrl(item)
+              return item
+            })
+          })       
+        }
+      }
+    )
+
+    //get published list and set storage
+    app.getUserData(app.globalData.USER_DATA_TYPES[1],
+      {
+        success: ({ commentList }) => {
+          wx.setStorage({
+            key: app.globalData.USER_DATA_TYPES[1],
+            data: commentList.map(item => {
+              item.fromNow = util.fromNowDate(item.create_time)
+              item.published = true
+              item.url = app.getDetailUrl(item)
+              return item
+            })
+          })
+        }
+      }
+    )
+
+  },
 })

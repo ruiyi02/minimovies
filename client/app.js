@@ -6,7 +6,8 @@ const util = require('./utils/util.js')
 App({
     globalData: {
       userInfo: null,
-      logged: false   
+      logged: false,
+      USER_DATA_TYPES: ['favorite', 'published']   
     },
     onLaunch: function () {
         qcloud.setLoginUrl(config.service.loginUrl)
@@ -48,6 +49,43 @@ App({
           })
         }
       })
+    },
+
+  // get user favorite list or published comment list with call backs
+  getUserData: function (dataType, { success, fail }) {
+    var that = this
+    qcloud.request({
+      url: dataType == this.globalData.USER_DATA_TYPES[0] ? config.service.favoriteListUrl : config.service.commentPublishedUrl,
+      login: true,
+      success: function (result) {
+        let data = result.data
+        if (!data.code) {
+          let commentList = data.data
+          success && success({
+            commentList
+          })        
+        }else
+          fail && fail({
+            error
+          })  
+      },
+      fail: function (error) {
+        fail && fail({
+          error
+        })        
+      }
+    })
+  },
+
+  getDetailUrl: function (comment) {
+    let movie = {
+      id: comment.movie_id,
+      title: comment.title,
+      category: comment.category,
+      image: comment.image
     }
+
+    return '/pages/comment-detail/comment-detail?movie=' + JSON.stringify(movie) + '&comment=' + JSON.stringify(comment)
+  }
 
 })

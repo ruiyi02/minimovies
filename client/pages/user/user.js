@@ -3,8 +3,6 @@ const config = require('../../config')
 const util = require('../../utils/util.js')
 const app = getApp()
 
-const COMMENT_LIST_TYPES = ['favorite', 'published']
-
 let sliderWidth = 26 // 需要设置slider的宽度，用于计算中间位置
 
 Page({
@@ -45,7 +43,8 @@ Page({
         that.setData({
           loggedin: true
         })
-        that.getCommentList()
+        that.getUserDataFromStorage()
+       // that.getCommentList()
       }
     })   
   },
@@ -67,51 +66,43 @@ Page({
       this.getCommentList()
   },
 
+  getUserDataFromStorage() {
+    let that = this
+    let dataType = app.globalData.USER_DATA_TYPES[this.data.activeTabIndex]
+    wx.getStorage({
+      key: dataType,
+      success: function(res) {
+         that.setData({
+           commentList: res
+         })
+      },
+    })
+  },
+
   getCommentList: function () {
     if (this.data.activeTabIndex ==0)
       util.showBusy('刷新我的收藏...')     
     else
       util.showBusy('刷新我的评论...') 
-        
-    var that = this
-    qcloud.request({
-      url: this.data.activeTabIndex == 0 ? config.service.favoriteListUrl : config.service.commentPublishedUrl,
-      login: true,
-      success: function (result) {
-        wx.hideToast()
-        wx.stopPullDownRefresh()
-        let data = result.data    
-        if (!data.code) {
-          that.setData({
-            commentList: data.data.map(item => {
+
+    let dataType = app.globalData.USER_DATA_TYPES[this.data.activeTabIndex]
+
+    let that = this
+    app.getUserData(dataType, 
+      {        
+        success: ({ commentList }) => {
+          wx.hideToast()
+          wx.stopPullDownRefresh()
+          this.setData({
+            commentList: commentList.map(item => {
               item.fromNow = util.fromNowDate(item.create_time)
               item.is_favorite = that.data.activeTabIndex == 0
-              item.url = that.getDetailUrl(item)              
+              item.url = app.getDetailUrl(item)
               return item
             })
           })
-          console.log(that.data.commentList)
         }
-      },
-
-      fail: function (error) {
-        wx.hideToast()
-        wx.stopPullDownRefresh()
-        util.showModel('请求失败', error);
-        console.log('request fail', error);
       }
-    })
-  },
-
-  getDetailUrl: function (comment) {
-    let movie ={
-      id: comment.movie_id,
-      title: comment.title,
-      category: comment.category,
-      image: comment.image
-    }
-
-    return '/pages/comment-detail/comment-detail?movie=' + JSON.stringify(movie) + '&comment=' + JSON.stringify(comment)
+    )  
   }
-
 })
