@@ -183,9 +183,7 @@ Page({
       },
       success: result => {
         wx.hideLoading()
-
         let data = result.data
-
         if (!data.code) {
           wx.showToast({
             title: '发表评论成功'
