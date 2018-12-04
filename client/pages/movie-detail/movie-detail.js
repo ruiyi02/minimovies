@@ -9,9 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    movie: {},
-    inputOptions: ['文字','音频'],
-    selectedInputIndex: 0
+    movie: {}
   },
 
   /**
@@ -68,20 +66,37 @@ Page({
 
   //navigate to add comment page
   toCommentEditor: function () {
-    let pageUrl ='/pages/add-comment/add-comment'
-    if(this.data.selectedInputIndex==1)
-      pageUrl = '/pages/add-voice-comment/add-voice-comment'
-    wx.navigateTo({
-      url: pageUrl+'?id=' + this.data.movie.id + '&title=' + this.data.movie.title + '&image=' + this.data.movie.image,
-    })
-  },
-
-  selectInputType: function (e) {
-    this.setData({
-      selectedInputIndex: e.detail.value
-    })
-
-    this.loginAndAddComment()
-  },
+    let that = this
+    // check if it's published by user
+    let is_published = false
+    let comment_published = app.getPublishedComment(this.data.movie)
+    if (comment_published)
+      is_published = true
+    // update is_favorite attribute
+    let comment_is_published = 'comment.is_published'
+    this.setData(
+      {
+        [comment_is_published]: is_published
+      }
+    )
+    // return if aleady added as favorite
+    if (is_published) {
+      console.log(comment_published)
+      wx.navigateTo({
+        url: comment_published.url
+      })
+    }else{
+      wx.showActionSheet({
+        itemList: ['文字', '音频'],
+        success: function (res) {
+          let selected = res.tapIndex
+          let pageUrl = res.tapIndex == 0 ? '/pages/add-comment/add-comment' : '/pages/add-voice-comment/add-voice-comment'
+          wx.navigateTo({
+            url: pageUrl + '?id=' + that.data.movie.id + '&title=' + that.data.movie.title + '&image=' + that.data.movie.image,
+          })
+        }
+      })
+    }
+  }
 
 })

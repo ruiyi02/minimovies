@@ -16,10 +16,9 @@ module.exports = {
     let voice_duration = ctx.request.body.voice_duration || null
 
     if (!isNaN(movieId)) {
-      await DB.query('INSERT INTO comments(user, username, avatar, content, voice, voice_duration, movie_id) VALUES (?, ?, ?, ?, ?, ?, ?)', [user, username, avatar, content, voice, voice_duration, movieId])
+      ctx.state.data = await DB.query('INSERT INTO comments(user, username, avatar, content, voice, voice_duration, movie_id) VALUES (?, ?, ?, ?, ?, ?, ?)', [user, username, avatar, content, voice, voice_duration, movieId])
     }
-
-    ctx.state.data = {}
+    //ctx.state.data = {}
   },
 
   /**

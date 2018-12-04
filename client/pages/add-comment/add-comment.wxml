@@ -1,10 +1,12 @@
 <view class="page"> 
   <view class="page__bd">  
-      <navigator url="../movie-detail/movie-detail?id={{movie.id}}">
-        <view  class="movie-image">
-          <image src="{{movie.image}}" mode="aspectFit" style="width: 200rpx" />  
-        </view>       
-        <view class='movie-title'>{{movie.title}}</view>                           
+      <navigator url="../movie-detail/movie-detail?id={{movie.id}}"  class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+          <view class="weui-cell__hd">                
+              <image mode="aspectFill" src="{{movie.image}}" class="movie-poster"></image>
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+               <view class="weui-media-box__title">{{movie.title}}</view>             
+          </view>
       </navigator>       
       <view class='comment-editor'>
           <textarea class='comment-input' placeholder-class='comment-placeholder' placeholder='请填写你的评论'  auto-focus maxlength='500' bindinput='onInput'></textarea>          </view>     

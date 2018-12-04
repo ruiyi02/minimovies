@@ -1,5 +1,6 @@
 //use moment.js for date format
   const moment = require("moment-with-locales.min.js")
+
   const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -9,6 +10,23 @@
   const second = date.getSeconds()
 
   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+}
+
+function formatNumberTime(time) {
+  if (typeof time !== 'number' || time < 0) {
+    return time
+  }
+
+  var hour = parseInt(time / 3600)
+  time = time % 3600
+  var minute = parseInt(time / 60)
+  time = time % 60
+  var second = time
+
+  return ([hour, minute, second]).map(function (n) {
+    n = n.toString()
+    return n[1] ? n : '0' + n
+  }).join(':')
 }
 
 const formatDate = date => {
@@ -53,4 +71,4 @@ var showModel = (title, content) => {
     })
 }
 
-module.exports = { formatTime, formatDate, fromNowDate, showBusy, showSuccess, showModel }
+module.exports = { formatTime, formatNumberTime, formatDate, fromNowDate, showBusy, showSuccess, showModel }

@@ -9,15 +9,12 @@
       <view class="movie-description">{{movie.description}}</view>    
     </view>   
     <view class="weui-flex btn-bottom">
-          <view class="weui-flex__item">
-            <button  type="primary" plain="true" style="width:98%" bindtap='viewComments'>查看影评</button>
-          </view>
-          <view class="weui-flex__item">
-          <picker bindchange="selectInputType" value="{{selectedInputIndex}}" range="{{inputOptions}}">
-             <button type="primary" plain="true" style="width:98%" >添加影评</button> 
-          </picker>
-            
-          </view>                 
-      </view>                         
-    </view>
+      <view class="weui-flex__item">
+        <button  type="primary" plain="true" style="width:98%" bindtap='viewComments'>查看影评</button>
+      </view>
+      <view class="weui-flex__item">
+        <button type="primary" plain="true" style="width:98%" bindtap='loginAndAddComment'>添加影评</button> 
+      </view>                 
+    </view>                         
+  </view>
 </view>

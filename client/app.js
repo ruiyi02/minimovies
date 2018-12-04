@@ -94,8 +94,7 @@ App({
     let favoriteList = wx.getStorageSync(this.globalData.USER_DATA_TYPES[0])
     if (favoriteList)
       for (var item of favoriteList){
-        if (item.id == comment.id) {
-          console.log(item.id, comment.id)
+        if (item.id == comment.id) {      
           return true
         } 
       }    
@@ -106,12 +105,24 @@ App({
   is_published(comment) {
     let publishedList = wx.getStorageSync(this.globalData.USER_DATA_TYPES[1])
     if (publishedList)
-      publishedList.forEach(function (item) {
-        if (parseInt(item.id) == comment.id)
+      for (var item of publishedList) {
+        if (item.id == comment.id) {
           return true
-      })
-
+        }
+      }  
     return false
+  },
+
+  //check if my published comment of a movie from storage
+  getPublishedComment(movie) {
+    let publishedList = wx.getStorageSync(this.globalData.USER_DATA_TYPES[1])
+    if (publishedList)
+      for (var item of publishedList) {
+        if (item.movie_id == movie.id) {
+          return item
+        }
+      }
+    return null
   },
 
   // delete item from user data list
@@ -119,11 +130,10 @@ App({
     let list = wx.getStorageSync(dataType)
     if (list){
       //delete item from list
-      list.forEach(function (item, index, object) {
-        if (item.id == comment.id) {
-          object.splice(index, 1)
-        }
-      })
+      var removeIndex = list.map(function (item) { return item.id; }).indexOf(comment.id);
+      if (removeIndex !== -1) 
+        list.splice(removeIndex, 1);
+
       //update storage
       wx.setStorage({
         key: dataType,

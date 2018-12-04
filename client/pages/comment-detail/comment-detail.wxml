@@ -37,9 +37,7 @@
               <button wx:else type="primary" plain="true" style='width:98%' bindtap='loginAndAddFavorite'>加入收藏</button>
             </view>
             <view class="weui-flex__item">
-                <picker bindchange="selectInputType" value="{{selectedInputIndex}}" range="{{inputOptions}}">
-                  <button type="primary" plain="true" style="width:98%" >添加影评</button> 
-                </picker>
+              <button type="primary" plain="true" style="width:98%" bindtap='loginAndAddComment'>添加影评</button> 
             </view>                 
           </view>      
       </view> 

@@ -10,9 +10,7 @@ Page({
    */
   data: {
     movie: {},
-    commentList:[],
-    inputOptions: ['文字', '音频'],
-    selectedInputIndex: 0
+    commentList:[]
   },
 
   /**
@@ -77,20 +75,17 @@ Page({
 
   //navigate to add comment page
   toCommentEditor: function () {
-    let pageUrl = '/pages/add-comment/add-comment'
-    if (this.data.selectedInputIndex == 1)
-      pageUrl = '/pages/add-voice-comment/add-voice-comment'
-    wx.navigateTo({
-      url: pageUrl + '?id=' + this.data.movie.id + '&title=' + this.data.movie.title + '&image=' + this.data.movie.image,
+    let that = this
+    wx.showActionSheet({
+      itemList: ['文字', '音频'],
+      success: function (res) {
+        let selected = res.tapIndex
+        let pageUrl = res.tapIndex == 0 ? '/pages/add-comment/add-comment' : '/pages/add-voice-comment/add-voice-comment'
+        wx.navigateTo({
+          url: pageUrl + '?id=' + that.data.movie.id + '&title=' + that.data.movie.title + '&image=' + that.data.movie.image,
+        })
+      }
     })
-  },
-
-  selectInputType: function (e) {
-    this.setData({
-      selectedInputIndex: e.detail.value
-    })
-
-    this.loginAndAddComment()
   },
   
 })

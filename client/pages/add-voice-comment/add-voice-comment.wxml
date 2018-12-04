@@ -1,13 +1,37 @@
 <view class="page"> 
   <view class="page__bd">  
-      <navigator url="../movie-detail/movie-detail?id={{movie.id}}">
-        <view  class="movie-image">
-          <image src="{{movie.image}}" mode="aspectFit" style="width: 200rpx" />  
-        </view>       
-        <view class='movie-title'>{{movie.title}}</view>                           
+      <navigator url="../movie-detail/movie-detail?id={{movie.id}}"  class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+          <view class="weui-cell__hd">                
+              <image mode="aspectFill" src="{{movie.image}}" class="movie-poster"></image>
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+               <view class="weui-media-box__title">{{movie.title}}</view>             
+          </view>
       </navigator>      
-      <button class="voice-btn" type="primary" plain="true" bindtouchstart="voiceStartRecord" bindtouchend="voiceEndRecord">按住说话
-      </button>    
+      <block wx:if="{{recording === false}}">
+        <view class="page-body-time">
+          <text class="time-big">{{formatedRecordTime}}</text>
+        </view>
+        <view class="page-body-buttons">
+          <view class="page-body-button"></view>
+          <view class="page-body-button" bindtap="voiceStartRecord">
+            <image src="/images/record.png"></image>
+          </view>
+          <view class="page-body-button"></view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="page-body-time">
+          <text class="time-big">{{formatedRecordTime}}</text>
+        </view>
+        <view class="page-body-buttons">
+          <view class="page-body-button"></view>
+          <view class="page-body-button" bindtap="voiceEndRecord">
+            <view class="button-stop-record"></view>
+          </view>
+          <view class="page-body-button"></view>
+        </view>
+      </block>
       <view class="btn-bottom">          
         <button class="weui-btn" type="primary" plain="true"  disabled="{{!voiceTempFilePath? true:false}}" style="width: 99%" bindtap='previewComment'>完成</button>              
       </view>

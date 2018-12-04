@@ -12,9 +12,7 @@ Page({
   data: {
     preview: false,
     movie: {},
-    comment: {},
-    inputOptions: ['文字', '音频'],
-    selectedInputIndex: 0
+    comment: {}  
   },
 
   /**
@@ -48,11 +46,20 @@ Page({
   //check login before add as favorite
   loginAndDeleteFavorite: function () {
     let that = this
-    app.checkSession({
-      success: function () {
-        that.deleteFavorite()
+    wx.showModal({
+      title: '删除收藏',
+      content: '确定要删除收藏吗？',
+      success: function (sm) {
+        if (sm.confirm) {
+          // 用户点击了确定 可以调用删除方法了
+          app.checkSession({
+            success: function () {
+              that.deleteFavorite()
+            }
+          })
+        } 
       }
-    })
+    })    
   },
 
   //check login before navigate to add comment page
@@ -67,27 +74,23 @@ Page({
 
   //navigate to add comment page
   toCommentEditor: function () {
-    let pageUrl = '/pages/add-comment/add-comment'
-    if (this.data.selectedInputIndex == 1)
-      pageUrl = '/pages/add-voice-comment/add-voice-comment'
-    wx.navigateTo({
-      url: pageUrl + '?id=' + this.data.movie.id + '&title=' + this.data.movie.title + '&image=' + this.data.movie.image,
+    let that = this
+    wx.showActionSheet({
+      itemList: ['文字', '音频'],
+      success: function (res) {
+        let selected = res.tapIndex
+        let pageUrl = res.tapIndex == 0 ? '/pages/add-comment/add-comment' : '/pages/add-voice-comment/add-voice-comment'
+        wx.navigateTo({
+          url: pageUrl + '?id=' + that.data.movie.id + '&title=' + that.data.movie.title + '&image=' + that.data.movie.image,
+        })
+      }
     })
-  },
-
-  selectInputType: function (e) {
-    this.setData({
-      selectedInputIndex: e.detail.value
-    })
-
-    this.loginAndAddComment()
   },
 
   //add favorite if not done before 
   addFavorite: function () {    
     // check if it's already added as favorite
     let is_favorite = app.is_favorite(this.data.comment)
-    console.log(is_favorite)
     // update is_favorite attribute
     let comment_is_favorite = 'comment.is_favorite'
     this.setData(
@@ -100,47 +103,47 @@ Page({
       wx.showToast({
         icon: 'none',
         title: '影评已经收藏过'
-      })    
-      return 
-    }    
+      })   
+    }else {
 
-    wx.showLoading({
-      title: '收藏评论'
-    })
+      wx.showLoading({
+        title: '收藏评论'
+      })
 
-    let that = this
-    qcloud.request({
-      url: config.service.addFavoritetUrl,
-      login: true,
-      method: 'PUT',
-      data: {
-        comment_id: this.data.comment.id
-      },
-      success: result => {
-        wx.hideLoading()
-        let data = result.data
-        if (!data.code) {
-          wx.showToast({
-            title: '收藏评论成功'
-          })
-
-          //refresh favorite list and reset storage
-          app.insert_user_data(that.data.comment, app.globalData.USER_DATA_TYPES[0])
-        } else {
+      let that = this
+      qcloud.request({
+        url: config.service.addFavoritetUrl,
+        login: true,
+        method: 'PUT',
+        data: {
+          comment_id: this.data.comment.id
+        },
+        success: result => {
+          wx.hideLoading()
+          let data = result.data
+          if (!data.code) {
+            wx.showToast({
+              title: '收藏评论成功'
+            })
+            //refresh favorite list and reset storage
+            app.insert_user_data(that.data.comment, app.globalData.USER_DATA_TYPES[0])
+          } else {
+            wx.showToast({
+              icon: 'none',
+              title: '收藏评论失败'
+            })
+          }
+        },
+        fail: () => {
+          wx.hideLoading()
           wx.showToast({
             icon: 'none',
             title: '收藏评论失败'
           })
         }
-      },
-      fail: () => {
-        wx.hideLoading()
-        wx.showToast({
-          icon: 'none',
-          title: '收藏评论失败'
-        })
-      }
-    })
+      })
+    }    
+
   },
 
   //add favorite 
@@ -166,7 +169,12 @@ Page({
           })
           //refresh favorite list and reset storage
           app.delete_user_data(that.data.comment, app.globalData.USER_DATA_TYPES[0])
-          wx.navigateBack({})
+          let comment_is_favorite = 'comment.is_favorite'
+          this.setData(
+            {
+              [comment_is_favorite]: false
+            }
+          )
         } else {
           wx.showToast({
             icon: 'none',
@@ -212,6 +220,8 @@ Page({
           wx.showToast({
             title: '发表评论成功'
           })
+
+          console.log(data.data)
 
           setTimeout(() => {
             // navigate back to movie detail page then to comment list page

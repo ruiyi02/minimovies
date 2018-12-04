@@ -5,6 +5,7 @@ const app = getApp()
 
 // 处理录音逻辑
 const recorderManager = wx.getRecorderManager();
+var recordTimeInterval
 
 Page({
 
@@ -14,7 +15,10 @@ Page({
   data: {
     movie: {},
     voiceTempFilePath: '',
-    voice_duration: 0
+    voice_duration: 0,
+    recording: false,
+    recordTime: 0,
+    formatedRecordTime: '00:00:00',
   },
 
   /**
@@ -46,6 +50,11 @@ Page({
         voice_duration: Math.ceil(res.duration / 1000)
       })
       console.log(res.tempFilePath)     
+
+      that.setData({
+        recording: false
+      })
+      clearInterval(recordTimeInterval)
     });
   },
 
@@ -54,6 +63,18 @@ Page({
   },
 
   voiceStartRecord() {
+    var that = this
+    this.setData({
+      recording: true
+    })
+    recordTimeInterval = setInterval(function () {
+      var recordTime = that.data.recordTime += 1
+      that.setData({
+        formatedRecordTime: util.formatNumberTime(that.data.recordTime),
+        recordTime: recordTime
+      })
+    }, 1000)
+
     console.log('start record');
     recorderManager.start({
       // 最大长度设置为 1 分钟
@@ -73,12 +94,14 @@ Page({
   },
 
   previewComment: function () {
-    let comment = {
+    var comment = {
       voiceTempFilePath: this.data.voiceTempFilePath,
       voice_duration: this.data.voice_duration,
       username: app.globalData.userInfo.nickName,
       avatar: app.globalData.userInfo.avatarUrl
     }
+
+    console.log(comment)
 
     wx.navigateTo({
       url: '/pages/comment-detail/comment-detail?preview=true&voice=true&' + 'movie=' + JSON.stringify(this.data.movie) + '&comment=' + JSON.stringify(comment),
