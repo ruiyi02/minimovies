@@ -29,8 +29,6 @@ Page({
       }      
     )
 
-    console.log(this.data.comment)
-
     if(this.data.preview)
       wx.setNavigationBarTitle({
         title: '影评预览'
@@ -85,12 +83,32 @@ Page({
     this.loginAndAddComment()
   },
 
-  //add favorite 
-  addFavorite: function () {      
+  //add favorite if not done before 
+  addFavorite: function () {    
+    // check if it's already added as favorite
+    let is_favorite = app.is_favorite(this.data.comment)
+    console.log(is_favorite)
+    // update is_favorite attribute
+    let comment_is_favorite = 'comment.is_favorite'
+    this.setData(
+        {
+          [comment_is_favorite]: is_favorite
+        }
+    )
+    // return if aleady added as favorite
+    if (is_favorite) {
+      wx.showToast({
+        icon: 'none',
+        title: '影评已经收藏过'
+      })    
+      return 
+    }    
+
     wx.showLoading({
-      title: '正在收藏评论'
+      title: '收藏评论'
     })
 
+    let that = this
     qcloud.request({
       url: config.service.addFavoritetUrl,
       login: true,
@@ -105,6 +123,9 @@ Page({
           wx.showToast({
             title: '收藏评论成功'
           })
+
+          //refresh favorite list and reset storage
+          app.insert_user_data(that.data.comment, app.globalData.USER_DATA_TYPES[0])
         } else {
           wx.showToast({
             icon: 'none',
@@ -128,6 +149,7 @@ Page({
       title: '正在删除收藏'
     })
 
+    let that = this
     qcloud.request({
       url: config.service.deleteFavoritetUrl,
       login: true,
@@ -142,6 +164,8 @@ Page({
           wx.showToast({
             title: '删除评论成功'
           })
+          //refresh favorite list and reset storage
+          app.delete_user_data(that.data.comment, app.globalData.USER_DATA_TYPES[0])
           wx.navigateBack({})
         } else {
           wx.showToast({
@@ -230,9 +254,9 @@ Page({
         name: 'file',
         success: res => {
           wx.hideToast()
-          let data = JSON.parse(res.data)
-          let comment_voice_url='comment.voiceUrl'
+          let data = JSON.parse(res.data)         
           if (!data.code) {
+            let comment_voice_url = 'comment.voiceUrl'
             that.setData({
               [comment_voice_url] : data.data.imgUrl //only update voiceUrl of comment
             })     

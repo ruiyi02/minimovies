@@ -31,6 +31,8 @@ Page({
           sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeTabIndex
         });
+        // load data from storage
+        that.getUserDataFromStorage()
       }
     })
   },
@@ -42,9 +44,7 @@ Page({
       success: function () {
         that.setData({
           loggedin: true
-        })
-        that.getUserDataFromStorage()
-       // that.getCommentList()
+        })    
       }
     })   
   },
@@ -57,13 +57,13 @@ Page({
         activeTabIndex: e.currentTarget.id
       });
 
-      this.getCommentList()
+      this.getUserDataFromStorage()
     }
   },
 
   onPullDownRefresh: function () {
     if (this.data.loggedin)
-      this.getCommentList()
+      this.refreshCommentList()
   },
 
   getUserDataFromStorage() {
@@ -72,14 +72,15 @@ Page({
     wx.getStorage({
       key: dataType,
       success: function(res) {
+        console.log(res)
          that.setData({
-           commentList: res
+           commentList: res.data
          })
       },
     })
   },
 
-  getCommentList: function () {
+  refreshCommentList: function () {
     if (this.data.activeTabIndex ==0)
       util.showBusy('刷新我的收藏...')     
     else
@@ -100,6 +101,12 @@ Page({
               item.url = app.getDetailUrl(item)
               return item
             })
+          })
+
+          //reset storage
+          wx.setStorage({
+            key: dataType,
+            data: this.data.commentList,
           })
         }
       }

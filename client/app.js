@@ -77,6 +77,7 @@ App({
     })
   },
 
+  // get comment detail page url
   getDetailUrl: function (comment) {
     let movie = {
       id: comment.movie_id,
@@ -86,6 +87,63 @@ App({
     }
 
     return '/pages/comment-detail/comment-detail?movie=' + JSON.stringify(movie) + '&comment=' + JSON.stringify(comment)
+  },
+
+  //check if comment is favorite from storage
+  is_favorite(comment) {
+    let favoriteList = wx.getStorageSync(this.globalData.USER_DATA_TYPES[0])
+    if (favoriteList)
+      for (var item of favoriteList){
+        if (item.id == comment.id) {
+          console.log(item.id, comment.id)
+          return true
+        } 
+      }    
+    return false
+  },
+
+  //check if comment is published from storage
+  is_published(comment) {
+    let publishedList = wx.getStorageSync(this.globalData.USER_DATA_TYPES[1])
+    if (publishedList)
+      publishedList.forEach(function (item) {
+        if (parseInt(item.id) == comment.id)
+          return true
+      })
+
+    return false
+  },
+
+  // delete item from user data list
+  delete_user_data(comment, dataType) {
+    let list = wx.getStorageSync(dataType)
+    if (list){
+      //delete item from list
+      list.forEach(function (item, index, object) {
+        if (item.id == comment.id) {
+          object.splice(index, 1)
+        }
+      })
+      //update storage
+      wx.setStorage({
+        key: dataType,
+        data: list,
+      })
+    }
+  },
+
+  // insert new item into user data list
+  insert_user_data(comment, dataType) {
+    let list = wx.getStorageSync(dataType);
+    if (list) {
+      //insert item into list at top
+      list.unshift(comment)
+      //update storage
+      wx.setStorage({
+        key: dataType,
+        data: list,
+      })
+    }
   }
 
 })
