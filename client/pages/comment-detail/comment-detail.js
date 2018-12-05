@@ -1,5 +1,6 @@
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const config = require('../../config')
+const util = require('../../utils/util.js')
 const app = getApp()
 
 const innerAudioContext = wx.createInnerAudioContext();
@@ -192,6 +193,7 @@ Page({
     })
   },
 
+  // publish comment
   publishComment: function () {
     let that = this
     let content = this.data.comment.content
@@ -216,24 +218,34 @@ Page({
       success: result => {
         wx.hideLoading()
         let data = result.data
-        if (!data.code) {
+        if (!data.code) {          
           wx.showToast({
             title: '发表评论成功'
           })
 
-          console.log(data.data)
+          let newComment = data.data
+          newComment.fromNow = util.fromNowDate(newComment.create_time)
+          newComment.is_published = true
+          newComment.url = app.getDetailUrl(newComment)
+          //update storage
+          app.insert_user_data(newComment, app.globalData.USER_DATA_TYPES[1])
 
-          setTimeout(() => {
-            // navigate back to movie detail page then to comment list page
+          setTimeout(() => {         
             wx.navigateBack({
               delta: 2,
-              success: function() {
+              success: function () {
                 wx.navigateTo({
                   url: '/pages/comment-list/comment-list?' + 'id=' + that.data.movie.id + '&title=' + that.data.movie.title + '&image=' + that.data.movie.image
                 })
               }
             })
           }, 2000)
+
+         
+          //get the new comment detail
+          //let insertId = data.data.insertId
+          //that.getCommentDetail(insertId)
+
         } else {
           wx.showToast({
             icon: 'none',
@@ -279,6 +291,38 @@ Page({
  
   },
 
+  //function to get the comment detail based id
+  getCommentDetail: function (id) {  
+    var that = this
+    qcloud.request({
+      url: config.service.commentDetailUrl + id,
+      success: function (result) {
+        wx.hideToast()
+        let data = result.data
+        if (!data.code) {
+          var newComment = data.data
+          newComment.fromNow = util.fromNowDate(newComment.create_time)
+          newComment.is_published = true
+          newComment.url = app.getDetailUrl(newComment)
+          //update storage
+          app.insert_user_data(newComment, app.globalData.USER_DATA_TYPES[1])
+
+          wx.navigateBack({
+            delta: 2,
+            success: function () {
+              wx.navigateTo({
+                url: '/pages/comment-list/comment-list?' + 'id=' + that.data.movie.id + '&title=' + that.data.movie.title + '&image=' + that.data.movie.image
+              })
+            }
+          })
+
+        }
+      },
+      fail: function () {       
+      }
+    })
+  },
+
   editComment: function() {
    wx.navigateBack()
   },
@@ -290,14 +334,18 @@ Page({
       voiceUrl = this.data.comment.voiceTempFilePath
     
     innerAudioContext.src = voiceUrl;
-    innerAudioContext.autoplay = true
-    innerAudioContext.onPlay(() => {
-      console.log('开始播放')
-    })
+    innerAudioContext.play()
     innerAudioContext.onError((res) => {
       console.log(res.errMsg)
       console.log(res.errCode)
     })  
-  }
- 
+  },
+
+
+  onUnload() {   
+    if(this.data.comment.voice){
+      innerAudioContext.stop();   
+      console.log('stop play')
+    }       
+  },
 })

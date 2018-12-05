@@ -35,6 +35,9 @@ var config = {
         // 获取评论列表
         commentListUrl: `${host}/weapp/comment`,
 
+        //get movie detail
+        commentDetailUrl: `${host}/weapp/comment/`,
+
         // 获取收藏的评论列表
         favoriteListUrl: `${host}/weapp/favorite`,
 

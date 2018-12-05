@@ -34,6 +34,9 @@ router.get('/comment/published', validationMiddleware, controllers.comment.publi
 // 获取评论列表
 router.get('/comment', controllers.comment.list)
 
+//get comment detail
+router.get('/comment/:id', controllers.comment.detail)
+
 // 添加评论
 router.put('/comment', validationMiddleware, controllers.comment.add)
 

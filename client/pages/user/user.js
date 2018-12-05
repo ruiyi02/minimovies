@@ -68,6 +68,10 @@ Page({
   },
 
   getUserDataFromStorage() {
+    //reset data first
+    this.setData({
+      commentList: []
+    })
     let that = this
     let dataType = app.globalData.USER_DATA_TYPES[this.data.activeTabIndex]
     wx.getStorage({

@@ -33,7 +33,7 @@
         </view>
       </block>
       <view class="btn-bottom">          
-        <button class="weui-btn" type="primary" plain="true"  disabled="{{!voiceTempFilePath? true:false}}" style="width: 99%" bindtap='previewComment'>完成</button>              
+        <button class="weui-btn" type="primary" plain="true"  disabled="{{!voiceTempFilePath? true:false}}" style="width: 99%" bindtap='previewComment'>预览</button>              
       </view>
   </view>
 </view>

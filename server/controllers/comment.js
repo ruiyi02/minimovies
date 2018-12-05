@@ -14,9 +14,14 @@ module.exports = {
     let content = ctx.request.body.content || null
     let voice = ctx.request.body.voice || null
     let voice_duration = ctx.request.body.voice_duration || null
-
+    let newComment
     if (!isNaN(movieId)) {
-      ctx.state.data = await DB.query('INSERT INTO comments(user, username, avatar, content, voice, voice_duration, movie_id) VALUES (?, ?, ?, ?, ?, ?, ?)', [user, username, avatar, content, voice, voice_duration, movieId])
+      let result = await DB.query('INSERT INTO comments(user, username, avatar, content, voice, voice_duration, movie_id) VALUES (?, ?, ?, ?, ?, ?, ?)', [user, username, avatar, content, voice, voice_duration, movieId])
+      //get new record id
+      let commentId = result.insertId
+      // return new comment
+      newComment = (await DB.query("select comments.*, movies.title, movies.category, movies.image from comments join movies on movies.id=comments.movie_id and comments.id=?", [commentId]))[0]
+      ctx.state.data = newComment
     }
     //ctx.state.data = {}
   },
@@ -37,6 +42,22 @@ module.exports = {
     } else {
       ctx.state.data = []
     }
+  },
+
+/**
+   * 获取详细评论
+   */
+  detail: async ctx => {
+    let commentId = + ctx.params.id
+    let comment
+
+    if (!isNaN(commentId)) {
+      comment = (await DB.query("select comments.*, movies.title, movies.category, movies.image from comments join movies on movies.id=comments.movie_id and comments.id=?", [commentId]))[0]
+    } else {
+      comment = {}
+    }
+
+    ctx.state.data = comment
   },
 
  /**

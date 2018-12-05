@@ -59,7 +59,10 @@ Page({
   },
 
   onShow: function () {
-
+     this.setData({
+       recordTime: 0,
+       formatedRecordTime: '00:00:00'
+     })
   },
 
   voiceStartRecord() {
@@ -78,7 +81,7 @@ Page({
     console.log('start record');
     recorderManager.start({
       // 最大长度设置为 1 分钟
-      duration:  60 * 1000,
+      duration:  10 * 1000,
       // 格式
       format: 'mp3',
       sampleRate: 16000,
