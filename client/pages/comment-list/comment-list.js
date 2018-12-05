@@ -60,6 +60,7 @@ Page({
   },
 
   getDetailUrl: function(comment){
+    delete comment.url
     return '/pages/comment-detail/comment-detail?movie=' + JSON.stringify(this.data.movie) + '&comment=' + JSON.stringify(comment)
   },
 

@@ -85,7 +85,7 @@ App({
       category: comment.category,
       image: comment.image
     }
-
+    delete comment.url
     return '/pages/comment-detail/comment-detail?movie=' + JSON.stringify(movie) + '&comment=' + JSON.stringify(comment)
   },
 

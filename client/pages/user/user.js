@@ -81,8 +81,8 @@ Page({
          that.setData({
            commentList: res.data.map(item => {
              item.fromNow = util.fromNowDate(item.create_time)
-             item.is_favorite = that.data.activeTabIndex == 0
-             //item.url = app.getDetailUrl(item)
+             item.is_favorite = that.data.activeTabIndex == 0           
+             item.url = app.getDetailUrl(item)
              return item
            })
          })
