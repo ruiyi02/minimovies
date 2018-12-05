@@ -8,29 +8,34 @@ Page({
    * 页面的初始数据
    */
   data: {
-    comment: {}
+    message: '好多热门电影！快去点评吧',
+    movie: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getRandomComment()
+    this.getRandomMovie()
   },
 
   //function to get a random comment
-  getRandomComment: function () {   
+  getRandomMovie: function () {   
     let that = this
     qcloud.request({
-      url: config.service.commentRandomUrl,
+      url: config.service.movieRandomUrl,
       success: function (result) {       
         let data = result.data
         if (!data.code) {
+          console.log(data.data)
           let item = data.data
-          item.fromNow = util.fromNowDate(item.create_time)
-          item.url = that.getDetailUrl(item)
+          if (item.id) {  //only if it comment
+            item.fromNow = util.fromNowDate(item.create_time)
+            item.url = that.getDetailUrl(item)
+          }
+        
           that.setData({
-            comment: item
+            movie: item
           })
         }
       },

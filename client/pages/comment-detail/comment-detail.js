@@ -27,6 +27,8 @@ Page({
         preview: options.preview || false,
       }      
     )
+    console.log(this.data.movie)
+    console.log(this.data.comment)
 
     if(this.data.preview)
       wx.setNavigationBarTitle({

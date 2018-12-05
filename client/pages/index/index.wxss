@@ -1,0 +1,6 @@
+.home-message {
+  margin-top: 100rpx;
+  text-align: center;
+  font-size: 40rpx;  
+  color: deepskyblue
+}

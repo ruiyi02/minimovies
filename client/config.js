@@ -17,6 +17,9 @@ var config = {
         //get movie list
         movieListUrl: `${host}/weapp/movie`,
 
+        // 获取随机电影
+        movieRandomUrl: `${host}/weapp/movie/random`,
+
         //get movie detail
         movieDetailUrl: `${host}/weapp/movie/`,
 

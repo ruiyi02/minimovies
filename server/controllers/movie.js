@@ -16,5 +16,17 @@ module.exports = {
     }
 
     ctx.state.data = movie
-  }
+  },
+
+  /**
+   * 获取一个随机电影
+   */
+  random: async ctx => {
+    let results = await DB.query("select movies.title, movies.category, movies.image, comments.* from movies join comments on movies.id=comments.movie_id order by RAND() limit 1")
+    if (results && results.length > 0)
+      ctx.state.data = results [0]
+    else{
+      ctx.state.data=(await DB.query("select movies.id as movie_id, movies.title, movies.category, movies.image from movies order by RAND() limit 1"))[0]
+      }
+  },
 }

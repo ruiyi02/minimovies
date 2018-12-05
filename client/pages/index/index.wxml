@@ -1,21 +1,24 @@
 <view class="page"> 
   <view class="page__bd">  
-    <navigator  url="../movie-detail/movie-detail?id={{comment.movie_id}}" >   
+    <navigator  url="../movie-detail/movie-detail?id={{movie.movie_id}}" >   
       <view class='movie-image'>
-        <image src="{{comment.image}}" mode="aspectFill" style="width: 700rpx; height: 800rpx" />
+        <image src="{{movie.image}}" mode="aspectFill" style="width: 700rpx; height: 800rpx" />
       </view> 
-      <view class="movie-title" >{{comment.title}}</view> 
+      <view class="movie-title" >{{movie.title}}</view> 
     </navigator>  
-    <navigator url="{{comment.url}}" class="comment-card">
-          <image class='comment-avatar' src='{{comment.avatar}}'></image>
+    <navigator wx:if="{{movie.id}}" url="{{movie.url}}" class="comment-card">
+          <image class='comment-avatar' src='{{movie.avatar}}'></image>
           <view class='comment-cnt'>
             <view class='comment-top'>
-              <view class='comment-username'>{{comment.username}}</view>
-              <view class="comment-time">{{comment.fromNow}}</view>
+              <view class='comment-username'>{{movie.username}}</view>
+              <view class="comment-time">{{movie.fromNow}}</view>
             </view>
-            <view class='comment-content comment-content-short'>{{comment.content}}</view>    
+            <view class='comment-content comment-content-short'>{{movie.content}}</view>    
           </view> 
-    </navigator>             
+    </navigator>
+    <view wx:else class='home-message'>
+        <text>{{message}}</text>
+    </view>             
   </view>
 </view>
 

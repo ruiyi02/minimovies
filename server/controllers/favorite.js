@@ -35,7 +35,7 @@ module.exports = {
    */
   list: async ctx => {
     let user = ctx.state.$wxInfo.userinfo.openId
-    ctx.state.data = await DB.query('select comments.*, movies.title, movies.image, movies.category from favorite_comments join comments on favorite_comments.comment_id=comments.id join movies on comments.movie_id=movies.id where favorite_comments.user = ?', [user])
+    ctx.state.data = await DB.query('select comments.*, movies.title, movies.image, movies.category from favorite_comments join comments on favorite_comments.comment_id=comments.id join movies on comments.movie_id=movies.id where favorite_comments.user = ? order by favorite_comments.create_time DESC', [user])
   }
 
 }
