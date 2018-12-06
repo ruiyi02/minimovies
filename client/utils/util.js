@@ -1,7 +1,7 @@
 //use moment.js for date format
   const moment = require("moment-with-locales.min.js")
 
-  const formatTime = date => {
+const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -46,6 +46,18 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const formatSeconds = (s) => {
+  let str = ""
+  if (s > 0) {
+    const minutes = Math.floor(s / 60);
+    const seconds = Math.floor(s - minutes * 60);
+    let m_str = minutes < 10 ? "0" + minutes : minutes;
+    let s_str = seconds < 10 ? "0" + seconds : seconds;
+    str = m_str + ":" + s_str + "\"";
+  }
+  return str;
+}
+
 
 // 显示繁忙提示
 var showBusy = text => wx.showToast({
@@ -71,4 +83,4 @@ var showModel = (title, content) => {
     })
 }
 
-module.exports = { formatTime, formatNumberTime, formatDate, fromNowDate, showBusy, showSuccess, showModel }
+module.exports = { formatTime, formatNumberTime, formatDate, fromNowDate, formatSeconds, showBusy, showSuccess, showModel }

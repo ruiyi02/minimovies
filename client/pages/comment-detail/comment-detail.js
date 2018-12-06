@@ -3,7 +3,7 @@ const config = require('../../config')
 const util = require('../../utils/util.js')
 const app = getApp()
 
-const innerAudioContext = wx.createInnerAudioContext();
+//const innerAudioContext = wx.createInnerAudioContext();
 
 Page({
 
@@ -199,9 +199,9 @@ Page({
   publishComment: function () {
     let that = this
     let content = this.data.comment.content
-    let voiceUrl = this.data.comment.voiceUrl
+    let voiceUploadedUrl = this.data.comment.voiceUploadedUrl
     let voice_duration = this.data.comment.voice_duration
-    if (!content && !voiceUrl) return
+    if (!content && !voiceUploadedUrl) return
 
     wx.showLoading({
       title: '正在发表评论'
@@ -213,7 +213,7 @@ Page({
       method: 'PUT',
       data: {
         content: content,
-        voice: voiceUrl,
+        voice: voiceUploadedUrl,
         voice_duration: voice_duration,
         movie_id: this.data.movie.id
       },
@@ -280,17 +280,16 @@ Page({
           wx.hideToast()
           let data = JSON.parse(res.data)         
           if (!data.code) {
-            let comment_voice_url = 'comment.voiceUrl'
+            let comment_voice_uploaded_url = 'comment.voiceUploadedUrl'
             that.setData({
-              [comment_voice_url] : data.data.imgUrl //only update voiceUrl of comment
+              [comment_voice_uploaded_url] : data.data.imgUrl //only update voiceUrl of comment
             })     
             that.publishComment()    
           }      
         }
       })
     }else
-      this.publishComment()
- 
+      this.publishComment() 
   },
 
   //function to get the comment detail based id
@@ -331,11 +330,8 @@ Page({
  
   playVoice() {
     console.log('play voice')
-    let voiceUrl = this.data.comment.voice
-    if(this.data.preview)
-      voiceUrl = this.data.comment.voiceTempFilePath
     
-    innerAudioContext.src = voiceUrl;
+    innerAudioContext.src = this.data.preview ? this.data.comment.voiceTempFilePath : this.data.comment.voice
     innerAudioContext.play()
     innerAudioContext.onError((res) => {
       console.log(res.errMsg)
@@ -345,9 +341,10 @@ Page({
 
 
   onUnload() {   
-    if(this.data.comment.voice){
+   /* if(this.data.comment.voice){
       innerAudioContext.stop();   
       console.log('stop play')
-    }       
-  },
+    } */    
+  }
+  
 })

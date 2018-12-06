@@ -1,0 +1,19 @@
+<!--components/record/record.wxml-->
+<view class="record_box">
+    <view bindtap='playRecord' class='record_btns'>
+        <image style="width: 50rpx; height: 50rpx;" src="/images/play.png" wx:if="{{isPaused}}" class="iconfont mb-bofang"></image>
+        <image style="width: 50rpx; height: 50rpx;" src="/images/stop.png" wx:else class="iconfont mb-zanting"></image>
+    </view> 
+    <view class='record_wave {{isPaused?"":"active"}}'>
+        <view class='wave1'></view>
+        <view class='wave2'></view>
+        <view class='wave3'></view>
+        <view class='wave4'></view>
+        <view class='wave5'></view>
+        <view class='wave6'></view>
+        <view class='wave7'></view>
+        <view class='wave8'></view>
+    </view>
+    <view class='record_time'><text wx:if="{{lastTime}}">{{lastTime}}</text></view>
+    <slot></slot>
+</view>

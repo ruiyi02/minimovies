@@ -15,7 +15,7 @@
             </view>          
             <view wx:if="{{comment.content}}" class='comment-content'>{{comment.content}}</view> 
             <view class='play-btn' wx:else>
-              <button bindtap='playVoice' type='primary' plain='true'>{{comment.voice_duration}}</button>
+              <record url='{{preview? comment.voiceTempFilePath : comment.voice}}' ></record>
             </view> 
           </view> 
       </view>

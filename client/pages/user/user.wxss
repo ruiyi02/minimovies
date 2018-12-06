@@ -12,3 +12,20 @@
 .comment-avatar {
    margin-right: 10rpx
 }
+
+.record_box { 
+  display: flex; 
+  background: #fff; 
+  box-shadow: 0 5rpx 20rpx rgba(0,0,0,0.1); 
+  border-radius: 80rpx; 
+  margin-top: 20rpx;
+  height: 90rpx; 
+  padding:0 20rpx; 
+  justify-content:center;
+  align-items: center;  
+}
+
+.record_btn { 
+  font-size:30rpx; 
+  opacity: 0.8;
+}

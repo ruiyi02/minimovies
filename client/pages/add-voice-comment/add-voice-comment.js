@@ -35,6 +35,22 @@ Page({
     })
 
     let that = this
+
+    recorderManager.onStart(() => {
+      console.log('recorder start')
+      var that = this
+      this.setData({
+        recording: true
+      })
+      recordTimeInterval = setInterval(function () {
+        var recordTime = that.data.recordTime += 1
+        that.setData({
+          formatedRecordTime: util.formatNumberTime(that.data.recordTime),
+          recordTime: recordTime
+        })
+      }, 1000)
+    })
+
     recorderManager.onStop(function (res) {
       // 不允许小于 1 秒
       if (res.duration < 1000) {
@@ -66,18 +82,6 @@ Page({
   },
 
   voiceStartRecord() {
-    var that = this
-    this.setData({
-      recording: true
-    })
-    recordTimeInterval = setInterval(function () {
-      var recordTime = that.data.recordTime += 1
-      that.setData({
-        formatedRecordTime: util.formatNumberTime(that.data.recordTime),
-        recordTime: recordTime
-      })
-    }, 1000)
-
     console.log('start record');
     recorderManager.start({
       // 最大长度设置为 1 分钟

@@ -13,7 +13,12 @@
               <view class='comment-username'>{{movie.username}}</view>
               <view class="comment-time">{{movie.fromNow}}</view>
             </view>
-            <view class='comment-content comment-content-short'>{{movie.content}}</view>    
+            <view wx:if="{{movie.voice}}" class="record_box">                                                                   <view class='record_btn'>
+                  <image style="width: 50rpx; height: 50rpx;" src="/images/play.png"></image>
+                  <text>{{movie.voice_duration}} "</text>
+              </view>
+            </view>
+            <view wx:else class='comment-content comment-content-short'>{{movie.content}}</view>    
           </view> 
     </navigator>
     <view wx:else class='home-message'>

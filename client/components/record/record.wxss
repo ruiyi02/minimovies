@@ -1,0 +1,26 @@
+/* components/record/record.wxss */
+/*@import "/static/css/iconfont.wxss";*/
+.record_box{ display: flex; flex-wrap: nowrap; background: #fff; box-shadow: 0 5rpx 20rpx rgba(0,0,0,0.1); border-radius: 100rpx; height: 120rpx; padding:0 20rpx; align-items: center; justify-content: space-between; color:#ff7b00;}
+.record_time{ width:120rpx; text-align: center; flex-grow: 0; font-size:30rpx; opacity: 0.8;}
+.record_btns{ height: 100rpx; padding:0 30rpx; line-height: 100rpx;}
+.record_wave{ display: flex; align-items: center;}
+.record_wave view{ width:8rpx; height: 50rpx; transform:scaleY(0.2); background: #ff7b00; margin:0 6rpx; border-radius: 10rpx;}
+.record_wave.active view{ animation: wave 0.8s infinite ease-in-out;}
+.record_wave.active .wave1,.record_wave.active .wave5{
+    animation-delay: 0s;
+}
+.record_wave.active .wave2,.record_wave.active .wave6{
+    animation-delay: 0.2s;
+}
+.record_wave.active .wave3,.record_wave.active .wave7{
+    animation-delay: 0.4s;
+}
+.record_wave.active .wave4,.record_wave.active .wave8{
+    animation-delay: 0.6s;
+}
+ 
+@keyframes wave{
+    0%{ transform:scaleY(0.2)}
+    50%{ transform:scaleY(1);}
+    0%{ transform:scaleY(0.2);}
+}

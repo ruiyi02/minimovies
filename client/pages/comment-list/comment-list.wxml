@@ -11,10 +11,12 @@
                 <view class='comment-username'>{{item.username}}</view>
                 <view class="comment-time">{{item.fromNow}}</view>
               </view>
-              <view class='play-btn' wx:if="{{item.voice}}">
-                <button type='primary' plain='true'>{{item.voice_duration}}</button>
-              </view>  
-              <view wx:else class='comment-content comment-content-short'>{{item.content}}</view> 
+              <view wx:if="{{item.voice}}" class="record_box">                                                                   <view class='record_btn'>
+                    <image style="width: 50rpx; height: 50rpx;" src="/images/play.png"></image>
+                    <text>{{item.voice_duration}} "</text>
+                </view>
+              </view>
+              <view wx:else class='comment-content comment-content-short'>{{item.content}}</view>                
             </view>
           </navigator>
         </view>
