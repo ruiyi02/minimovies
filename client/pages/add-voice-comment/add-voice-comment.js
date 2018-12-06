@@ -101,19 +101,18 @@ Page({
   },
 
   previewComment: function () {
-    var comment = {
-      voiceTempFilePath: this.data.voiceTempFilePath,
-      voice_duration: this.data.voice_duration,
+    var comment = {     
       username: app.globalData.userInfo.nickName,
-      avatar: app.globalData.userInfo.avatarUrl
+      avatar: app.globalData.userInfo.avatarUrl,
+      voiceTempFilePath: this.data.voiceTempFilePath,
+      voice_duration: this.data.voice_duration
     }
 
     console.log(comment)
-
+   
     wx.navigateTo({
-      url: '/pages/comment-detail/comment-detail?preview=true&voice=true&' + 'movie=' + JSON.stringify(this.data.movie) + '&comment=' + JSON.stringify(comment),
+      url: '/pages/comment-detail/comment-detail?preview=true&voice=true&' + 'movie=' + encodeURIComponent(JSON.stringify(this.data.movie)) + '&comment=' + encodeURIComponent(JSON.stringify(comment)),
     })
   }
-
 
 })

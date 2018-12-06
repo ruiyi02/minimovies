@@ -3,7 +3,7 @@ const config = require('../../config')
 const util = require('../../utils/util.js')
 const app = getApp()
 
-//const innerAudioContext = wx.createInnerAudioContext();
+const innerAudioContext = wx.createInnerAudioContext();
 
 Page({
 
@@ -22,8 +22,8 @@ Page({
   onLoad: function (options) {
     this.setData(
       {
-        movie: JSON.parse(options.movie),
-        comment: JSON.parse(options.comment),
+        movie: JSON.parse(decodeURIComponent(options.movie)),
+        comment: JSON.parse(decodeURIComponent(options.comment)),
         preview: options.preview || false,
       }      
     )
@@ -341,10 +341,9 @@ Page({
 
 
   onUnload() {   
-   /* if(this.data.comment.voice){
+   if(this.data.comment.voice){
       innerAudioContext.stop();   
       console.log('stop play')
-    } */    
-  }
-  
+    }    
+  }  
 })

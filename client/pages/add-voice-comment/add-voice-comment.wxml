@@ -7,31 +7,18 @@
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
                <view class="weui-media-box__title">{{movie.title}}</view>             
           </view>
-      </navigator>      
-      <block wx:if="{{recording === false}}">
-        <view class="page-body-time">
-          <text class="time-big">{{formatedRecordTime}}</text>
+      </navigator>
+      <view class="record-time">
+        <text class="time-big">{{formatedRecordTime}}</text>
+      </view>
+      <view class="record-buttons">  
+        <view wx:if="{{!recording}}" class="record-button" bindtap="voiceStartRecord">
+          <image src="/images/record.png"></image>
         </view>
-        <view class="page-body-buttons">
-          <view class="page-body-button"></view>
-          <view class="page-body-button" bindtap="voiceStartRecord">
-            <image src="/images/record.png"></image>
-          </view>
-          <view class="page-body-button"></view>
+        <view wx:else class="record-button" bindtap="voiceEndRecord">
+          <view class="button-stop-record"></view>
         </view>
-      </block>
-      <block wx:else>
-        <view class="page-body-time">
-          <text class="time-big">{{formatedRecordTime}}</text>
-        </view>
-        <view class="page-body-buttons">
-          <view class="page-body-button"></view>
-          <view class="page-body-button" bindtap="voiceEndRecord">
-            <view class="button-stop-record"></view>
-          </view>
-          <view class="page-body-button"></view>
-        </view>
-      </block>
+      </view>    
       <view class="btn-bottom">          
         <button class="weui-btn" type="primary" plain="true"  disabled="{{!voiceTempFilePath? true:false}}" style="width: 99%" bindtap='previewComment'>预览</button>              
       </view>

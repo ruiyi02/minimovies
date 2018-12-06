@@ -61,7 +61,7 @@ Page({
 
   getDetailUrl: function(comment){
     delete comment.url
-    return '/pages/comment-detail/comment-detail?movie=' + JSON.stringify(this.data.movie) + '&comment=' + JSON.stringify(comment)
+    return '/pages/comment-detail/comment-detail?movie=' + encodeURIComponent(JSON.stringify(this.data.movie)) + '&comment=' + encodeURIComponent(JSON.stringify(comment))
   },
 
   //check login before navigate to add comment page

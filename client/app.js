@@ -86,7 +86,7 @@ App({
       image: comment.image
     }
     delete comment.url
-    return '/pages/comment-detail/comment-detail?movie=' + JSON.stringify(movie) + '&comment=' + JSON.stringify(comment)
+    return '/pages/comment-detail/comment-detail?movie=' + encodeURIComponent(JSON.stringify(movie)) + '&comment=' + encodeURIComponent(JSON.stringify(comment))
   },
 
   //check if comment is favorite from storage

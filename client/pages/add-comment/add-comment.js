@@ -45,7 +45,7 @@ Page({
     }
 
     wx.navigateTo({
-      url: '/pages/comment-detail/comment-detail?preview=true&' + 'movie=' + JSON.stringify(this.data.movie) + '&comment=' + JSON.stringify(comment),
+      url: '/pages/comment-detail/comment-detail?preview=true&' + 'movie=' + encodeURIComponent(JSON.stringify(this.data.movie)) + '&comment=' + encodeURIComponent(JSON.stringify(comment)),
     })
   }
  

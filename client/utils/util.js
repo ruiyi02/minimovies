@@ -53,7 +53,7 @@ const formatSeconds = (s) => {
     const seconds = Math.floor(s - minutes * 60);
     let m_str = minutes < 10 ? "0" + minutes : minutes;
     let s_str = seconds < 10 ? "0" + seconds : seconds;
-    str = m_str + ":" + s_str + "\"";
+    str = m_str + ":" + s_str;
   }
   return str;
 }

@@ -41,7 +41,7 @@ image {
   flex-grow: 1;
   margin-bottom: 300rpx;
 }
-.page-body-time {
+.record-time {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,16 +50,13 @@ image {
   font-size: 60rpx;
   margin: 20rpx;
 }
-.time-small {
-  font-size: 30rpx;
-}
 
-.page-body-buttons {
-  margin-top: 60rpx;
+.record-buttons {
+  margin-top: 40rpx;
   display: flex;
   justify-content: space-around;
 }
-.page-body-button {
+.record-button {
   width: 250rpx;
   text-align: center;
 }
