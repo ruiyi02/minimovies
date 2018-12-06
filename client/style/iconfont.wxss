@@ -1,0 +1,19 @@
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1544120316344'); /* IE9*/
+  src: url('iconfont.eot?t=1544120316344#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAARQAAsAAAAABrgAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAADMAAABCsP6z7U9TLzIAAAE8AAAARAAAAFY9UElDY21hcAAAAYAAAABYAAABhmtC0oFnbHlmAAAB2AAAAIcAAACg6bHI/GhlYWQAAAJgAAAALwAAADYTflX1aGhlYQAAApAAAAAcAAAAJAfeA4RobXR4AAACrAAAAAwAAAAMDAAAAGxvY2EAAAK4AAAACAAAAAgAHABQbWF4cAAAAsAAAAAeAAAAIAEPACxuYW1lAAAC4AAAAUUAAAJtPlT+fXBvc3QAAAQoAAAAJgAAADf1BOxHeJxjYGRgYOBikGPQYWB0cfMJYeBgYGGAAJAMY05meiJQDMoDyrGAaQ4gZoOIAgCKIwNPAHicY2BkYWCcwMDKwMHUyXSGgYGhH0IzvmYwYuRgYGBiYGVmwAoC0lxTGBye3XoeyNzwv4EhhrmBoQEozAiSAwD1Hg0PeJztkLERgDAMA99JSMExCAXL0FExOAOQMYLswBbo7i1bThoDE5DFJgrYieE6lFrkmTnyEm+q3Ej31fbe4XPJtKvy5P+s8muJur5T8msNvG/7AHsAm0UR9nicY2BkYPh/kHkSsz0DNwMDJyObmqmgiZk4o5gIc+tfTl5hYV6m77yMef+iOXj4mL34eDiALBEGIGAC6mtg9mVuYOBnkGdgYBXUY9RmVGJjF5RjtGY0MmNURrDNgXKMaxkF+XbxCTJCqcZdvEJgNpiKZ94PsuqPI5+wMPNbKIMPJAgAYy0bTgB4nGNgZGBgAGL5X8Vr4/ltvjJwszCAwA39jj8I+n8DCwNzA5DLwcAEEgUAPz0LEAB4nGNgZGBgbvjfwBDDwgACQJKRARUwAwBHCQJsBAAAAAQAAAAEAAAAAAAAAAAcAFB4nGNgZGBgYGZQYGBiAAEQyQWEDAz/wXwGAAvpATwAAHicZY9NTsMwEIVf+gekEqqoYIfkBWIBKP0Rq25YVGr3XXTfpk6bKokjx63UA3AejsAJOALcgDvwSCebNpbH37x5Y08A3OAHHo7fLfeRPVwyO3INF7gXrlN/EG6QX4SbaONVuEX9TdjHM6bCbXRheYPXuGL2hHdhDx18CNdwjU/hOvUv4Qb5W7iJO/wKt9Dx6sI+5l5XuI1HL/bHVi+cXqnlQcWhySKTOb+CmV7vkoWt0uqca1vEJlODoF9JU51pW91T7NdD5yIVWZOqCas6SYzKrdnq0AUb5/JRrxeJHoQm5Vhj/rbGAo5xBYUlDowxQhhkiMro6DtVZvSvsUPCXntWPc3ndFsU1P9zhQEC9M9cU7qy0nk6T4E9XxtSdXQrbsuelDSRXs1JErJCXta2VELqATZlV44RelzRiT8oZ0j/AAlabsgAAAB4nGNgYoAALgbsgJmRiZGZkYWBpSAnsZKtILG0ONWQgQEAJOYEKwAA') format('woff'),
+  url('iconfont.ttf?t=1544120316344') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1544120316344#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-play:before { content: "\e751"; }
+
+.icon-pause:before { content: "\e6da"; }

@@ -64,6 +64,7 @@ Component({
             currentTime: 0
           })
         })
+
         innerAudio.onPlay(() => {
           innerAudio.onTimeUpdate(() => {
             setLastTime();

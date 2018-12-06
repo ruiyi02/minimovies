@@ -1,8 +1,8 @@
 <!--components/record/record.wxml-->
 <view class="record_box">
     <view bindtap='playRecord' class='record_btns'>
-        <image style="width: 50rpx; height: 50rpx;" src="/images/play.png" wx:if="{{isPaused}}" class="iconfont mb-bofang"></image>
-        <image style="width: 50rpx; height: 50rpx;" src="/images/stop.png" wx:else class="iconfont mb-zanting"></image>
+        <icon wx:if="{{isPaused}}" class="iconfont icon-play"></icon>
+        <icon wx:else class="iconfont icon-pause"></icon>
     </view> 
     <view class='record_wave {{isPaused?"":"active"}}'>
         <view class='wave1'></view>

@@ -20,8 +20,8 @@
                         <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
                             <view class="weui-media-box__title">{{item.title}}</view>
                             <view class="weui-media-box__desc">{{item.category}}</view>
-                            <view wx:if="{{item.voice}}" class="record_box">                                                                   <view class='record_btn'>
-                                <image style="width: 50rpx; height: 50rpx;" src="/images/play.png"></image>
+                            <view wx:if="{{item.voice}}" class="record_box">                                                               <view class='record_btn'>
+                                <icon class="iconfont icon-play"></icon>
                                 <text>{{item.voice_duration}} "</text>
                               </view>
                             </view>                           

@@ -18,7 +18,7 @@ Page({
     voice_duration: 0,
     recording: false,
     recordTime: 0,
-    formatedRecordTime: '00:00:00',
+    formatedRecordTime: '00:00',
   },
 
   /**
@@ -35,7 +35,6 @@ Page({
     })
 
     let that = this
-
     recorderManager.onStart(() => {
       console.log('recorder start')
       var that = this
@@ -45,7 +44,7 @@ Page({
       recordTimeInterval = setInterval(function () {
         var recordTime = that.data.recordTime += 1
         that.setData({
-          formatedRecordTime: util.formatNumberTime(that.data.recordTime),
+          formatedRecordTime: util.formatSeconds(that.data.recordTime),
           recordTime: recordTime
         })
       }, 1000)
@@ -70,14 +69,14 @@ Page({
       that.setData({
         recording: false
       })
-      clearInterval(recordTimeInterval)
+      
     });
   },
 
   onShow: function () {
      this.setData({
        recordTime: 0,
-       formatedRecordTime: '00:00:00'
+       formatedRecordTime: '00:00'
      })
   },
 
@@ -85,7 +84,7 @@ Page({
     console.log('start record');
     recorderManager.start({
       // 最大长度设置为 1 分钟
-      duration:  10 * 1000,
+      duration:  60 * 1000,
       // 格式
       format: 'mp3',
       sampleRate: 16000,
@@ -98,6 +97,7 @@ Page({
   voiceEndRecord() {
     console.log('stop record');
     recorderManager.stop();
+    clearInterval(recordTimeInterval)
   },
 
   previewComment: function () {

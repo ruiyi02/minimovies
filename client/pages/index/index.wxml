@@ -14,7 +14,7 @@
               <view class="comment-time">{{movie.fromNow}}</view>
             </view>
             <view wx:if="{{movie.voice}}" class="record_box">                                                                   <view class='record_btn'>
-                  <image style="width: 50rpx; height: 50rpx;" src="/images/play.png"></image>
+                  <icon class="iconfont icon-play"></icon>
                   <text>{{movie.voice_duration}} "</text>
               </view>
             </view>
