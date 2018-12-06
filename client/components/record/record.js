@@ -22,9 +22,21 @@ Component({
     clearWaveInterval: null,//其他音频播放的时候暂停动画
   },
 
+  lifetimes: {
+    // 生命周期函数，可以为函数，或一个在methods段中定义的方法名
+    detached: function () { 
+      console.log('control detached') 
+      console.log('stop play') 
+      innerAudio.stop()
+    },
+  },
+
+
   pageLifetimes: {
     // 组件所在页面的生命周期函数
     hide: function () { 
+      console.log('page hide')
+      console.log('stop play')
       innerAudio.stop()
     },
 

@@ -3,7 +3,7 @@ const config = require('../../config')
 const util = require('../../utils/util.js')
 const app = getApp()
 
-const innerAudioContext = wx.createInnerAudioContext();
+//const innerAudioContext = wx.createInnerAudioContext();
 
 Page({
 
@@ -337,13 +337,15 @@ Page({
       console.log(res.errMsg)
       console.log(res.errCode)
     })  
-  },
+  }
 
-
-  onUnload() {   
+  /*onUnload() {   
+   console.log('unload page')
    if(this.data.comment.voice){
+      let innerAudioContext = wx.createInnerAudioContext();
       innerAudioContext.stop();   
       console.log('stop play')
     }    
-  }  
+  } */
+
 })
