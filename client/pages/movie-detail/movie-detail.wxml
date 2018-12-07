@@ -12,8 +12,9 @@
       <view class="weui-flex__item">
         <button  type="primary" plain="true" style="width:98%" bindtap='viewComments'>查看影评</button>
       </view>
-      <view class="weui-flex__item">
-        <button type="primary" plain="true" style="width:98%" bindtap='loginAndAddComment'>添加影评</button> 
+      <view class="weui-flex__item">       
+        <button wx:if="{{comment_published}}" type="primary" plain="true" style="width:98%" bindtap='loginAndViewComment'>我的影评</button>
+        <button wx:else type="primary" plain="true" style="width:98%" bindtap='loginAndAddComment'>添加影评</button> 
       </view>                 
     </view>                         
   </view>

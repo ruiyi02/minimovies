@@ -1,6 +1,7 @@
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const config = require('../../config')
 const util = require('../../utils/util.js')
+const app = getApp()
 
 Page({
 
@@ -27,7 +28,6 @@ Page({
       success: function (result) {       
         let data = result.data
         if (!data.code) {
-          console.log(data.data)
           let item = data.data
           if (item.id) {  //only if it comment
             item.fromNow = util.fromNowDate(item.create_time)
@@ -50,7 +50,7 @@ Page({
       title: comment.title,
       image: comment.image
     }
-  
+
     return '/pages/comment-detail/comment-detail?movie=' + encodeURIComponent(JSON.stringify(movie)) + '&comment=' + encodeURIComponent(JSON.stringify(comment))
 
   }

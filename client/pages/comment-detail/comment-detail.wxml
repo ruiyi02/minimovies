@@ -19,7 +19,7 @@
             </view> 
           </view> 
       </view>
-      <view wx:if="{{!comment.post_by_me}}">
+   
         <view wx:if="{{preview}}">
           <view class="weui-flex btn-bottom">
             <view class="weui-flex__item">
@@ -37,12 +37,12 @@
               <button wx:else type="primary" plain="true" style='width:98%' bindtap='loginAndAddFavorite'>加入收藏</button>
             </view>
             <view class="weui-flex__item">
-              <button type="primary" plain="true" style="width:98%" bindtap='loginAndAddComment'>添加影评</button> 
+            <button wx:if="{{!comment_published}}" type="primary" plain="true" style="width:98%" bindtap='loginAndAddComment'>添加影评</button> 
+              <button wx:elif="{{!comment.is_published}}" type="primary" plain="true" style="width:98%" bindtap='loginAndViewComment'>我的影评</button>               
             </view>                 
           </view>      
-      </view> 
-      </view>                 
 
+      </view>              
    </view>
 </view>
 

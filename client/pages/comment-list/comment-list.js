@@ -10,6 +10,7 @@ Page({
    */
   data: {
     movie: {},
+    comment_published: false,
     commentList:[]
   },
 
@@ -20,11 +21,12 @@ Page({
     let movie = {
       id: options.id,
       title: options.title,
-      image: options.image
+      image: options.image     
     }
 
     this.setData({
-      movie: movie
+      movie: movie,
+      comment_published: app.getPublishedComment(movie)
     })
 
     this.getCommentList(movie.id)

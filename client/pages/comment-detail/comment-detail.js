@@ -13,23 +13,33 @@ Page({
   data: {
     preview: false,
     movie: {},
-    comment: {}  
+    comment: {} 
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let movie = JSON.parse(decodeURIComponent(options.movie))
+    let comment = JSON.parse(decodeURIComponent(options.comment))
+
+    let comment_published = app.getPublishedComment(movie)
+    if (comment_published) {
+      if (comment_published.id == comment.id)
+        comment.is_published = true
+    }
+
+    comment.is_favorite = app.is_favorite(comment)
+
     this.setData(
       {
-        movie: JSON.parse(decodeURIComponent(options.movie)),
-        comment: JSON.parse(decodeURIComponent(options.comment)),
+        movie: movie,
+        comment: comment,
         preview: options.preview || false,
+        comment_published: comment_published
       }      
     )
-    console.log(this.data.movie)
-    console.log(this.data.comment)
-
+   
     if(this.data.preview)
       wx.setNavigationBarTitle({
         title: '影评预览'
@@ -234,7 +244,7 @@ Page({
 
           setTimeout(() => {         
             wx.navigateBack({
-              delta: 2,
+              delta: 2, //ignore edit and preview page
               success: function () {
                 wx.navigateTo({
                   url: '/pages/comment-list/comment-list?' + 'id=' + that.data.movie.id + '&title=' + that.data.movie.title + '&image=' + that.data.movie.image

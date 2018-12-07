@@ -9,7 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    movie: {}
+    movie: {},
+    comment_published: {} 
   },
 
   /**
@@ -29,9 +30,12 @@ Page({
         wx.hideToast()
         let data = result.data
         if (!data.code) {
+          let movie = data.data
           that.setData({
-            movie: data.data
+            movie: movie,
+            comment_published: app.getPublishedComment(movie) //get my published comment of this movie from storage
           })
+          console.log(that.data.comment_published)
         } else {
           setTimeout(() => {
             wx.navigateBack()
@@ -64,26 +68,31 @@ Page({
     })
   },
 
+  //check login before navigate to add comment page
+  loginAndViewComment: function () {
+    let that = this
+    app.checkSession({
+      success: function () {
+       wx.navigateTo({
+         url: that.data.comment_published.url
+       })
+      }
+    })
+  },
+
   //navigate to add comment page
   toCommentEditor: function () {
     let that = this
-    // check if it's published by user
-    let is_published = false
-    let comment_published = app.getPublishedComment(this.data.movie)
-    if (comment_published)
-      is_published = true
-    // update is_favorite attribute
-    let comment_is_published = 'comment.is_published'
-    this.setData(
-      {
-        [comment_is_published]: is_published
-      }
-    )
-    // return if aleady added as favorite
-    if (is_published) {
-      console.log(comment_published)
+    // double check again if there is my comment on this movie
+    //get my published comment of this movie from storage
+    if (!this.data.comment_published){
+      that.setData({   
+        comment_published: app.getPublishedComment(this.data.movie)
+      })
+    }    
+    if (this.data.comment_published) {
       wx.navigateTo({
-        url: comment_published.url
+        url: this.data.comment_published.url
       })
     }else{
       wx.showActionSheet({
