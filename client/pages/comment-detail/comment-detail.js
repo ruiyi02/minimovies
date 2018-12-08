@@ -13,22 +13,26 @@ Page({
   data: {
     preview: false,
     movie: {},
-    comment: {} 
+    comment: {},
+    comment_published: {} //my published comment for this movie
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
     let movie = JSON.parse(decodeURIComponent(options.movie))
     let comment = JSON.parse(decodeURIComponent(options.comment))
-
+   
+   // get my comment for this movie 
     let comment_published = app.getPublishedComment(movie)
     if (comment_published) {
+      //check if the current comment is from me
       if (comment_published.id == comment.id)
         comment.is_published = true
     }
-
+    //check if the comment is favorite
     comment.is_favorite = app.is_favorite(comment)
 
     this.setData(
@@ -51,7 +55,21 @@ Page({
     let that = this
     app.checkSession({
       success: function () {
-        that.addFavorite()
+        // double check if it's already added as favorite
+        let comment_is_favorite = 'comment.is_favorite'
+        that.setData(
+          {
+            [comment_is_favorite]: app.is_favorite(that.data.comment)
+          }
+        )
+        // return if aleady added as favorite
+        if (that.data.comment.is_favorite) {
+          wx.showToast({
+            icon: 'none',
+            title: '影评已经收藏过'
+          })
+        }else
+          that.addFavorite()
       }
     })   
   },
@@ -67,7 +85,21 @@ Page({
           // 用户点击了确定 可以调用删除方法了
           app.checkSession({
             success: function () {
-              that.deleteFavorite()
+              // double check if it's still as favorite
+              let comment_is_favorite = 'comment.is_favorite'
+              that.setData(
+                {
+                  [comment_is_favorite]: app.is_favorite(that.data.comment)
+                }
+              )
+              // return if aleady added as favorite
+              if (!that.data.comment.is_favorite) {
+                wx.showToast({
+                  icon: 'none',
+                  title: '影评没有收藏过'
+                })
+              }else
+                  that.deleteFavorite()
             }
           })
         } 
@@ -75,12 +107,34 @@ Page({
     })    
   },
 
+  //check login before navigate to comment detail page
+  loginAndViewComment: function () {
+    let that = this
+    app.checkSession({
+      success: function () {
+        wx.navigateTo({
+          url: that.data.comment_published.url
+        })
+      }
+    })
+  },
+
   //check login before navigate to add comment page
   loginAndAddComment: function () {
     let that = this
     app.checkSession({
       success: function () {
-        that.toCommentEditor()
+        //double check again if there is my comment on this movie
+        //get my published comment of this movie from storage
+        that.setData({
+          comment_published: app.getPublishedComment(that.data.movie)
+        })
+        if (that.data.comment_published) {
+          wx.navigateTo({
+            url: that.data.comment_published.url
+          })
+        } else
+          that.toCommentEditor()
       }
     })
   },
@@ -102,23 +156,6 @@ Page({
 
   //add favorite if not done before 
   addFavorite: function () {    
-    // check if it's already added as favorite
-    let is_favorite = app.is_favorite(this.data.comment)
-    // update is_favorite attribute
-    let comment_is_favorite = 'comment.is_favorite'
-    this.setData(
-        {
-          [comment_is_favorite]: is_favorite
-        }
-    )
-    // return if aleady added as favorite
-    if (is_favorite) {
-      wx.showToast({
-        icon: 'none',
-        title: '影评已经收藏过'
-      })   
-    }else {
-
       wx.showLoading({
         title: '收藏评论'
       })
@@ -138,8 +175,13 @@ Page({
             wx.showToast({
               title: '收藏评论成功'
             })
+       
             //refresh favorite list and reset storage
             app.insert_user_data(that.data.comment, app.globalData.USER_DATA_TYPES[0])
+            let comment_is_favorite = 'comment.is_favorite'
+            that.setData({
+                [comment_is_favorite]: true
+            })
           } else {
             wx.showToast({
               icon: 'none',
@@ -155,7 +197,7 @@ Page({
           })
         }
       })
-    }    
+    
 
   },
 
@@ -183,11 +225,9 @@ Page({
           //refresh favorite list and reset storage
           app.delete_user_data(that.data.comment, app.globalData.USER_DATA_TYPES[0])
           let comment_is_favorite = 'comment.is_favorite'
-          this.setData(
-            {
-              [comment_is_favorite]: false
-            }
-          )
+          that.setData({
+            [comment_is_favorite]: false
+          })
         } else {
           wx.showToast({
             icon: 'none',

@@ -18,31 +18,19 @@
               <record url='{{preview? comment.voiceTempFilePath : comment.voice}}' ></record>
             </view> 
           </view> 
-      </view>
-   
-        <view wx:if="{{preview}}">
-          <view class="weui-flex btn-bottom">
-            <view class="weui-flex__item">
-              <button type="primary" plain="true"  style='width:98%' bindtap='editComment'>编辑</button>
-            </view>
-            <view class="weui-flex__item">
-                <button type="primary" plain="true"  style='width:98%' bindtap='uploadComment'>发布</button> 
-            </view>                 
-          </view>   
-        </view>             
-        <view wx:else>
-          <view class="weui-flex btn-bottom">
-            <view class="weui-flex__item">
-              <button wx:if="{{comment.is_favorite}}" type="primary" plain="true" style='width:98%' bindtap='loginAndDeleteFavorite'>删除收藏</button>
-              <button wx:else type="primary" plain="true" style='width:98%' bindtap='loginAndAddFavorite'>加入收藏</button>
-            </view>
-            <view class="weui-flex__item">
-            <button wx:if="{{!comment_published}}" type="primary" plain="true" style="width:98%" bindtap='loginAndAddComment'>添加影评</button> 
-              <button wx:elif="{{!comment.is_published}}" type="primary" plain="true" style="width:98%" bindtap='loginAndViewComment'>我的影评</button>               
-            </view>                 
-          </view>      
-
-      </view>              
-   </view>
+      </view>   
+      <view class="btns-bottom">
+          <block wx:if="{{preview}}">         
+             <button type="primary" plain="true" bindtap='editComment'>编辑</button>
+             <button type="primary" plain="true" bindtap='uploadComment'>发布</button> 
+          </block>
+          <block wx:else>   
+             <button wx:if="{{comment.is_favorite}}" type="primary" plain="true" bindtap='loginAndDeleteFavorite'>删除收藏</button>
+             <button wx:else type="primary" plain="true" bindtap='loginAndAddFavorite'>加入收藏</button>
+             <button wx:if="{{!comment_published}}" type="primary" plain="true"  bindtap='loginAndAddComment'>添加影评</button> 
+             <button wx:elif="{{!comment.is_published}}" type="primary" plain="true"  bindtap='loginAndViewComment'>我的影评</button>              
+          </block>           
+      </view>  
+  </view>
 </view>
 

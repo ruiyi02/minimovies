@@ -10,8 +10,8 @@
       </navigator>       
       <view class='comment-editor'>
           <textarea class='comment-input' placeholder-class='comment-placeholder' placeholder='请填写你的评论'  auto-focus maxlength='500' bindinput='onInput'></textarea>          </view>     
-      <view class="btn-bottom">          
-          <button class="weui-btn" type="primary" plain="true"  disabled="{{!commentValue? true:false}}" style="width: 99%" bindtap='previewComment'>预览</button>              
+      <view class="btns-bottom">          
+          <button class="weui-btn" type="primary" plain="true"  disabled="{{!commentValue? true:false}}"  bindtap='previewComment'>预览</button>              
       </view>
   </view>
 </view>

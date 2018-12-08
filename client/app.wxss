@@ -104,13 +104,16 @@
   margin-bottom: 124rpx;
 }
 
-.btn-bottom {  
+.btns-bottom {  
     position: fixed;
     bottom: 10rpx;
-    width:100%;
+    width: 100%;
     display: flex;
-    justify-content:center;
-    align-items:center;
+    justify-content:space-around;   
 }
 
+.btns-bottom button {
+  margin: 10rpx;
+  flex: 1;
+}
 

@@ -8,14 +8,10 @@
       <view class="movie-category">{{movie.category}}</view>
       <view class="movie-description">{{movie.description}}</view>    
     </view>   
-    <view class="weui-flex btn-bottom">
-      <view class="weui-flex__item">
-        <button  type="primary" plain="true" style="width:98%" bindtap='viewComments'>查看影评</button>
-      </view>
-      <view class="weui-flex__item">       
-        <button wx:if="{{comment_published}}" type="primary" plain="true" style="width:98%" bindtap='loginAndViewComment'>我的影评</button>
-        <button wx:else type="primary" plain="true" style="width:98%" bindtap='loginAndAddComment'>添加影评</button> 
-      </view>                 
+    <view class="btns-bottom">
+      <button  type="primary" plain="true" bindtap='viewComments'>查看影评</button>
+      <button wx:if="{{comment_published}}" type="primary" plain="true" bindtap='loginAndViewComment'>我的影评</button>
+      <button wx:else type="primary" plain="true" bindtap='loginAndAddComment'>添加影评</button>
     </view>                         
   </view>
 </view>

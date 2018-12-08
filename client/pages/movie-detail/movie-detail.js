@@ -63,12 +63,22 @@ Page({
     let that = this
     app.checkSession({
       success: function () {
-        that.toCommentEditor()
+        //double check again if there is my comment on this movie
+        //get my published comment of this movie from storage
+        that.setData({
+          comment_published: app.getPublishedComment(that.data.movie)
+        })
+        if (that.data.comment_published) {
+          wx.navigateTo({
+            url: that.data.comment_published.url
+          })
+        }else
+          that.toCommentEditor()
       }
     })
   },
 
-  //check login before navigate to add comment page
+  //check login before navigate to comment detail page
   loginAndViewComment: function () {
     let that = this
     app.checkSession({
@@ -83,19 +93,7 @@ Page({
   //navigate to add comment page
   toCommentEditor: function () {
     let that = this
-    // double check again if there is my comment on this movie
-    //get my published comment of this movie from storage
-    if (!this.data.comment_published){
-      that.setData({   
-        comment_published: app.getPublishedComment(this.data.movie)
-      })
-    }    
-    if (this.data.comment_published) {
-      wx.navigateTo({
-        url: this.data.comment_published.url
-      })
-    }else{
-      wx.showActionSheet({
+    wx.showActionSheet({
         itemList: ['文字', '音频'],
         success: function (res) {
           let selected = res.tapIndex
@@ -105,7 +103,7 @@ Page({
           })
         }
       })
-    }
+    
   }
 
 })

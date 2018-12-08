@@ -21,10 +21,8 @@
           </navigator>
         </view>
     </view>     
-    <view class= "weui-flex btn-bottom">            
-      <view wx:if="{{!comment_published}}" class="weui-flex__item">
-        <button type="primary" plain="true" style="width:98%" bindtap='loginAndAddComment'>添加影评</button> 
-      </view>    
+    <view wx:if="{{!comment_published}}" class= "btns-bottom">           
+        <button type="primary" plain="true" bindtap='loginAndAddComment'>添加影评</button> 
     </view>         
    </view>
 </view>

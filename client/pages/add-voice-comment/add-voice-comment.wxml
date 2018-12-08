@@ -19,8 +19,8 @@
           <view class="button-stop-record"></view>
         </view>
       </view>    
-      <view class="btn-bottom">          
-        <button class="weui-btn" type="primary" plain="true"  disabled="{{!voiceTempFilePath? true:false}}" style="width: 99%" bindtap='previewComment'>预览</button>              
+      <view class="btns-bottom">          
+        <button class="weui-btn" type="primary" plain="true"  disabled="{{!voiceTempFilePath? true:false}}"  bindtap='previewComment'>预览</button>              
       </view>
   </view>
 </view>

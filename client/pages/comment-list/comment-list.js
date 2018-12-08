@@ -10,7 +10,7 @@ Page({
    */
   data: {
     movie: {},
-    comment_published: false,
+    comment_published: {},
     commentList:[]
   },
 
@@ -71,7 +71,17 @@ Page({
     let that = this
     app.checkSession({
       success: function () {
-        that.toCommentEditor()
+        //double check again if there is my comment on this movie
+        //get my published comment of this movie from storage
+        that.setData({
+          comment_published: app.getPublishedComment(that.data.movie)
+        })
+        if (that.data.comment_published) {
+          wx.navigateTo({
+            url: that.data.comment_published.url
+          })
+        } else
+          that.toCommentEditor()
       }
     })
   },
